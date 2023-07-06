@@ -43,7 +43,7 @@ const App = () => {
   const [hideRouter2, setHideRouterAdmin] = useState(true);
 
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 
   useEffect(() => {
@@ -53,32 +53,32 @@ const App = () => {
   }, [dispatch]);
 
 
-     useEffect(() => {
-      if(localStorage.auth != null){ 
+  useEffect(() => {
+    if (localStorage.auth != null) {
       getUserInfo()
     }
-    }, []);
-      
-    const [userData ,setUserData]= useState(null)
-   const getUserInfo = async ()=>{
-    try {
-        const token = localStorage.getItem("auth");
-        const response = await dispatch(fetchUserNew(token)); 
-        setUserData(response.payload[0]) 
-        let ManegeRouters =[];
+  }, []);
 
-        let role=response.payload[0].role
-        if(role ==1){
-          ManegeRouters= [true ,false,true ]
-        }else{
-          ManegeRouters= [false ,true,true ]
-        }
-        setHideRouterUser(ManegeRouters[0]);
-        setHideRouterAdmin(ManegeRouters[1]);      
-      } catch (error) {
-        console.error('Failed to add Pokemon:', error);
+  const [userData, setUserData] = useState(null)
+  const getUserInfo = async () => {
+    try {
+      const token = localStorage.getItem("auth");
+      const response = await dispatch(fetchUserNew(token));
+      setUserData(response.payload[0])
+      let ManegeRouters = [];
+
+      let role = response.payload[0].role
+      if (role == 1) {
+        ManegeRouters = [true, false, true]
+      } else {
+        ManegeRouters = [false, true, true]
       }
-}
+      setHideRouterUser(ManegeRouters[0]);
+      setHideRouterAdmin(ManegeRouters[1]);
+    } catch (error) {
+      console.error('Failed to add Pokemon:', error);
+    }
+  }
 
 
 
@@ -89,15 +89,14 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-
-          <Route index element={<Home />} />    
-          <Route path="SignUp" element={<SignUp />} />    
-          <Route path="Profile" element={<Profile />} />    
-          <Route path="LogIn" element={<LogIn />} />    
-          <Route path="BlogDetails" element={<BlogDetails />} />    
-          <Route path="Blog" element={<Blog />} />    
-          <Route path="Contact" element={<Contact />} />    
-          <Route path="Games" element={<Games />} />    
+          <Route index element={<Home />} />
+          <Route path="SignUp" element={<SignUp />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="LogIn" element={<LogIn />} />
+          <Route path="BlogDetails" element={<BlogDetails />} />
+          <Route path="Blog" element={<Blog />} />
+          <Route path="Contact" element={<Contact />} />
+          <Route path="Games" element={<Games />} />
         </Routes>
         <Footer />
       </Router>
