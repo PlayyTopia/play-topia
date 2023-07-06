@@ -5,3 +5,23 @@
 body {
     font-family: 'mono';
 }
+
+.my-swal-button {
+    padding: 0 1rem;
+    margin-right: 0.5rem;
+    height: 2.5rem;
+    border-style: solid;
+    border-color: #E8AA42;
+    border-width: 2px;
+    color: #E8AA42;
+    background-color: transparent;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 0.5rem;
+  }
+  
+  .my-swal-button:hover {
+
+
+    background-color: #E8AA42;
+    color: #ffffff;
+  }

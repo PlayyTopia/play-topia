@@ -3,8 +3,7 @@ import React, { useState } from "react";
 const TotalRating = ({ rating }) => {
   const starCount = 5; // Total number of stars
 
-  const filledStars = Math.floor(rating); // Number of filled stars
-
+  const filledStars = Math.floor(Number(rating)); // Number of filled stars
   // Calculate the number of empty stars
   const emptyStars = starCount - filledStars;
 
