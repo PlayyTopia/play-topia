@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import useBlog from "./PostFunction";
+import { fetchUserNew } from "../../actions/UserActions";
+
 function PostForm() {
-  //   const [userId, setUserId] = useState(null);
+  const { handleSubmit } = useBlog();
+  const dispatch = useDispatch();
   const [image, setImg] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [userId, setUserId] = useState("");
-
-  const {
-    loading: userLoading,
-    data: userData,
-    error: userError,
-  } = useSelector((state) => state.user);
+  const [userData, setUserData] = useState("");
 
   const onTitleChanged = (e) => setTitle(e.target.value);
   const onContentChanged = (e) => setContent(e.target.value);
 
-  const onSavePostClicked = () => {
-    useEffect(() => {
-      setUserId(userData?.id);
-    }, [userData]);
+  const getUserInfo = async () => {
+    try {
+      const token = localStorage.getItem("auth");
+      const response = await dispatch(fetchUserNew(token));
+      setUserData(response.payload[0]);
+    } catch (error) {
+      console.error("Failed to add Pokemon:", error);
+    }
   };
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
   return (
-    <form onS>
+    <form onSubmit={(e) => handleSubmit({ image, title, content, userData ,e})}>
       <div className="heading text-center font-bold text-2xl m-5 text-white">
         New Post
       </div>
@@ -38,7 +44,9 @@ function PostForm() {
           type="file"
           placeholder="Table Image"
           name="guest_num"
-          onChange={(e) => {(e)=>setImg(e.target.file)}}
+          onChange={(e) => {
+            setImg(e.target.files[0]);
+          }}
           accept="image/*"
         />
         <input
@@ -62,12 +70,12 @@ function PostForm() {
         </div>
         {/* buttons */}
         <div className="buttons flex">
-          <div className="btn border bg-white border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">
-            Cancel
-          </div>
-          <div className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500">
+          <button
+            type="submit"
+            className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
+          >
             Post
-          </div>
+          </button>
         </div>
       </div>
     </form>
