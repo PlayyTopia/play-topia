@@ -38,8 +38,7 @@ const gameSchema = new Schema({
     UsersIdRate:{
         type : Array,
         required : false,
-    },
-
+    }
     },
      {timestamps : true}
     )

@@ -43,7 +43,7 @@ export default function NavbarA() {
         color="blue-gray"
         className="p-1 font-normal"
       >
-       <Link to="/" className="flex items-center">
+       <Link to="/About" className="flex items-center">
           About Us
         </Link>
       </Typography>
