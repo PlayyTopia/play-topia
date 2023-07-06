@@ -10,7 +10,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <Provider store={store}>
-      <div className="bg-[#10143d] font-serif">
+      <div className="bg-[#10143d]">
         <App />
       </div>
     </Provider>
