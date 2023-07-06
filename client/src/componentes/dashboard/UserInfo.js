@@ -30,7 +30,7 @@ const UsersInfo = () => {
 
       console.log(response.data);
       setPersons(response.data.data);
-       setFilterDataUsers(response.data.data);
+      setFilterDataUsers(response.data.data);
     } catch (error) {
       console.error("Error inserting data:", error);
     }
@@ -70,7 +70,7 @@ const UsersInfo = () => {
 
   slicedArrayUsers = FilterDataUsers.slice(startIndexUsers, endIndexUsers);
   console.log(FilterDataUsers)
-  
+
 
   const handlePageChangeUsers = (event, pageNumber) => {
     setCurrentPageUsers(pageNumber);
@@ -84,19 +84,19 @@ const UsersInfo = () => {
       confirmButtonText: "OK",
       cancelButtonText: "Cancel",
       icon: "warning",
-    }).then( async (result) => {
+    }).then(async (result) => {
       /* Read more about isConfirmed, isDenied below */
       if (result.isConfirmed) {
         Swal.fire(` ${name} has been removed `, "", "success");
 
 
-          try {
-            await axios.delete(`http://localhost:5000/api/users/${id}`);
-            allUsers(); // Refresh the user list after deleting a user
-          } catch (error) {
-            console.error("Error deleting user:", error);
-          }
-      
+        try {
+          await axios.delete(`http://localhost:5000/api/users/${id}`);
+          allUsers(); // Refresh the user list after deleting a user
+        } catch (error) {
+          console.error("Error deleting user:", error);
+        }
+
         // window.location.reload();
       } else Swal.fire(" Cancelled", "", "error");
     });
@@ -159,7 +159,7 @@ const UsersInfo = () => {
       <div className="bg-[#ffffff] mr-5 ml-5 p-10 rounded-2xl min-h-[calc(100vh)]   ">
         <div className="relative flex items-center justify-between pt-4">
           <div className="text-xl font-bold text-navy-700 dark:text-white">
-            Users 
+            Users
           </div>
         </div>
 
@@ -289,29 +289,29 @@ const UsersInfo = () => {
                     >
                       <p className="text-sm font-bold text-navy-700 dark:text-white">
                         {
-                        e.role == 0 ? (
-                          <div className=" w-10 flex flex-col justify-center items-center">
-                            {" "}
-                            <Icon path={mdiAccountOutline} size={1} />{" "}
-                            <span>user</span>{" "}
-                          </div>
-                        ) : e.role == 1 ? (
-                          <div className=" w-10 flex flex-col justify-center items-center">
-                            {" "}
-                            <Icon path={mdiShieldCrownOutline} size={1} />{" "}
-                            <span>Admin</span>{" "}
-                          </div>
-                        ) : (
+                          e.role == 0 ? (
+                            <div className=" w-10 flex flex-col justify-center items-center">
+                              {" "}
+                              <Icon path={mdiAccountOutline} size={1} />{" "}
+                              <span>user</span>{" "}
+                            </div>
+                          ) : e.role == 1 ? (
+                            <div className=" w-10 flex flex-col justify-center items-center">
+                              {" "}
+                              <Icon path={mdiShieldCrownOutline} size={1} />{" "}
+                              <span>Admin</span>{" "}
+                            </div>
+                          ) : (
 
-                          <div className=" w-10 flex flex-col justify-center items-center">
-                          {" "}
-                          <Icon  path={mdiSilverware} size={1} />
-                          {" "}
-                          <span>Provider</span>{" "}
-                        </div>
+                            <div className=" w-10 flex flex-col justify-center items-center">
+                              {" "}
+                              <Icon path={mdiSilverware} size={1} />
+                              {" "}
+                              <span>Provider</span>{" "}
+                            </div>
 
-                        )
-                      }
+                          )
+                        }
 
                       </p>
                     </td>
@@ -323,9 +323,9 @@ const UsersInfo = () => {
                       <button
                         onClick={() => handleUpdate(e._id, e.role, e.firstName)}
                       >
-                       
-                          <Icon color="blue" path={mdiHumanEdit} size={1} />
-                       
+
+                        <Icon color="blue" path={mdiHumanEdit} size={1} />
+
                       </button>
                     </td>
 

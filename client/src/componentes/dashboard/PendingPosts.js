@@ -4,7 +4,7 @@ import { mdiFileEdit } from "@mdi/js";
 import Pagination from "@mui/material/Pagination";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { mdiCheckDecagram  } from "@mdi/js";
+import { mdiCheckDecagram } from "@mdi/js";
 import Swal from "sweetalert2";
 import { mdiSilverware } from "@mdi/js";
 import { mdiHandshakeOutline } from "@mdi/js";
@@ -12,47 +12,47 @@ import { mdiAccountOutline } from "@mdi/js";
 
 const PendingPosts = () => {
 
-    const [persons, setPersons] = useState([]);
-    const [personsAp, setPersonsAp] = useState([]);
-    const [persons0, setPersons0] = useState([]);
-  
-    const [searchTermUsers, setSearchTermUsers] = useState("");
-    const [searchTermUsersAp, setSearchTermUsersAp] = useState("");
-    const [FilterDataUsers, setFilterDataUsers] = useState([]);
-    const [FilterDataUsersAp, setFilterDataUsersAp] = useState([]);
-    const [HandleP, setHandleP] = useState();
-  
-    const allAdmins = async () => {
-        try {
-            const response = await axios.get("http://localhost:5000/api/beneficiarysAdmin");
-            setPersons(response.data);
-          console.log(response.data)
-          setFilterDataUsers(response.data)
-          } catch (error) {
-            console.error("Error inserting data:", error);
-          }
+  const [persons, setPersons] = useState([]);
+  const [personsAp, setPersonsAp] = useState([]);
+  const [persons0, setPersons0] = useState([]);
 
-     
-          try {
-            const response = await axios.get("http://localhost:5000/api/allBeneficiarysAdminAp");
-            setPersonsAp(response.data);
-          console.log(response.data)
-          setFilterDataUsersAp(response.data)
-          } catch (error) {
-            console.error("Error inserting data:", error);
-          }
+  const [searchTermUsers, setSearchTermUsers] = useState("");
+  const [searchTermUsersAp, setSearchTermUsersAp] = useState("");
+  const [FilterDataUsers, setFilterDataUsers] = useState([]);
+  const [FilterDataUsersAp, setFilterDataUsersAp] = useState([]);
+  const [HandleP, setHandleP] = useState();
+
+  const allAdmins = async () => {
+    try {
+      const response = await axios.get("http://localhost:5000/api/beneficiarysAdmin");
+      setPersons(response.data);
+      console.log(response.data)
+      setFilterDataUsers(response.data)
+    } catch (error) {
+      console.error("Error inserting data:", error);
+    }
 
 
+    try {
+      const response = await axios.get("http://localhost:5000/api/allBeneficiarysAdminAp");
+      setPersonsAp(response.data);
+      console.log(response.data)
+      setFilterDataUsersAp(response.data)
+    } catch (error) {
+      console.error("Error inserting data:", error);
+    }
 
-        };
 
-     
-      useEffect(() => {
-        allAdmins();
-      }, []);
-//-----------------------search------------------------//
 
-const filterDataByNameUsers = (searchTermUsers) => {
+  };
+
+
+  useEffect(() => {
+    allAdmins();
+  }, []);
+  //-----------------------search------------------------//
+
+  const filterDataByNameUsers = (searchTermUsers) => {
     const filteredDataUsers = persons.filter((item) =>
       item.Name.toLowerCase().includes(searchTermUsers.toLowerCase())
     );
@@ -60,7 +60,7 @@ const filterDataByNameUsers = (searchTermUsers) => {
     console.log(filteredDataUsers);
     setCurrentPageUsers(1);
   };
-const filterDataByNameUsersAp = (searchTermUsers) => {
+  const filterDataByNameUsersAp = (searchTermUsers) => {
     const filteredDataUsers = personsAp.filter((item) =>
       item.Name.toLowerCase().includes(searchTermUsers.toLowerCase())
     );
@@ -325,17 +325,17 @@ const filterDataByNameUsersAp = (searchTermUsers) => {
                       role="cell"
                     >
                       <p className="text-sm font-bold text-navy-700 dark:text-white">
-                        
-                        
-                          <div className=" w-10 flex flex-col justify-center items-center">
-                            {" "}
-                            <Icon path={mdiHandshakeOutline} size={1} />{" "}
-                            <span>user</span>{" "}
-                          </div>
-                         
 
-                        
-                      
+
+                        <div className=" w-10 flex flex-col justify-center items-center">
+                          {" "}
+                          <Icon path={mdiHandshakeOutline} size={1} />{" "}
+                          <span>user</span>{" "}
+                        </div>
+
+
+
+
 
                       </p>
                     </td>
@@ -347,9 +347,9 @@ const filterDataByNameUsersAp = (searchTermUsers) => {
                       <button
                         onClick={() => handleUpdate(e._id, e.role, e.Name)}
                       >
-                       
-                          <Icon color="blue" path={mdiCheckDecagram } size={1} />
-                       
+
+                        <Icon color="blue" path={mdiCheckDecagram} size={1} />
+
                       </button>
                     </td>
 
@@ -383,7 +383,7 @@ const filterDataByNameUsersAp = (searchTermUsers) => {
 
 
 
-     
+
 
       <div className="bg-[#ffffff] mr-5 ml-5 p-10 rounded-2xl min-h-[calc(100vh)]   ">
         <div className="relative flex items-center justify-between pt-4">
@@ -517,17 +517,17 @@ const filterDataByNameUsersAp = (searchTermUsers) => {
                       role="cell"
                     >
                       <p className="text-sm font-bold text-navy-700 dark:text-white">
-                        
-                        
-                          <div className=" w-10 flex flex-col justify-center items-center">
-                            {" "}
-                            <Icon path={mdiHandshakeOutline} size={1} />{" "}
-                            <span>user</span>{" "}
-                          </div>
-                         
 
-                        
-                      
+
+                        <div className=" w-10 flex flex-col justify-center items-center">
+                          {" "}
+                          <Icon path={mdiHandshakeOutline} size={1} />{" "}
+                          <span>user</span>{" "}
+                        </div>
+
+
+
+
 
                       </p>
                     </td>
@@ -539,9 +539,9 @@ const filterDataByNameUsersAp = (searchTermUsers) => {
                       <button
                         onClick={() => handleUpdate(e._id, e.role, e.Name)}
                       >
-                       
-                          <Icon color="blue" path={mdiCheckDecagram } size={1} />
-                       
+
+                        <Icon color="blue" path={mdiCheckDecagram} size={1} />
+
                       </button>
                     </td>
 

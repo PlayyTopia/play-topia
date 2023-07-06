@@ -33,17 +33,24 @@ import EditAboutContact from "./pages/dashboard/EditAboutUs";
 import UserInfo from "./componentes/dashboard/UserInfo"
 import ApproveTable from "./componentes/dashboard/ApproveTable";
 // import AdminInfo from "./components/dashboard/AdminInfo";
-import  Chat  from "./pages/dashboard/Chat";
+import Chat from "./pages/dashboard/Chat";
 import PendingPosts from "./componentes/dashboard/PendingPosts";
 // import PaymentsInfo from "./components/dashboard/Payment"
 
 const App = () => {
-  
+
   const [hideRouter1, setHideRouterUser] = useState(false);
   const [hideRouter2, setHideRouterAdmin] = useState(true);
 
 
     const dispatch = useDispatch();
+
+
+  useEffect(() => {
+    if (localStorage.auth != null) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch]);
 
 
      useEffect(() => {
@@ -74,12 +81,15 @@ const App = () => {
 }
 
 
-// ------------------user -------------------------- //
-   const AppRouter1 = () => {
+
+
+  // ------------------user -------------------------- //
+  const AppRouter1 = () => {
     return (
       <Router>
-        <Navbar /> 
+        <Navbar />
         <Routes>
+
           <Route index element={<Home />} />    
           <Route path="SignUp" element={<SignUp />} />    
           <Route path="Profile" element={<Profile />} />    
@@ -88,8 +98,10 @@ const App = () => {
           <Route path="Blog" element={<Blog />} />    
           <Route path="Contact" element={<Contact />} />    
           <Route path="Games" element={<Games />} />    
+ element={<Contact />} />
+
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     );
   };
@@ -112,22 +124,22 @@ const App = () => {
       //   </Routes>
       // </Router>
       <Router>
-      <Sidebar />
-      <div style={{ width: "100%" }}>
-        <NavListMenuD />
-        <Routes>
-          <Route index element={<MainDashboard />} />
-          <Route path="ListUser" element={<UserInfo />} />
-          <Route path="EditAboutContact" element={<EditAboutContact />} />
-          <Route path="Chat" element={<Chat />} />
-          {/* <Route path="UserProfile" element={<UserProfile />} /> */}
-          <Route path="ListRestaurant" element={<ApproveTable />} />
-          {/* <Route path="ListAdmin" element={<AdminInfo />} /> */}
-          <Route path="AcceptTables" element={<PendingPosts />} />
-          {/* <Route path="PaymentsInfo" element={<PaymentsInfo />} /> */}
-        </Routes>
-      </div>
-    </Router>
+        <Sidebar />
+        <div style={{ width: "100%" }}>
+          <NavListMenuD />
+          <Routes>
+            <Route index element={<MainDashboard />} />
+            <Route path="ListUser" element={<UserInfo />} />
+            <Route path="EditAboutContact" element={<EditAboutContact />} />
+            <Route path="Chat" element={<Chat />} />
+            {/* <Route path="UserProfile" element={<UserProfile />} /> */}
+            <Route path="ListRestaurant" element={<ApproveTable />} />
+            {/* <Route path="ListAdmin" element={<AdminInfo />} /> */}
+            <Route path="AcceptTables" element={<PendingPosts />} />
+            {/* <Route path="PaymentsInfo" element={<PaymentsInfo />} /> */}
+          </Routes>
+        </div>
+      </Router>
     );
   };
 
@@ -144,7 +156,7 @@ const App = () => {
 
   return (
 
- 
+
     <>
       {hideRouter1 ? null : (
         <>
@@ -160,10 +172,10 @@ const App = () => {
         </>
       )}
 
- 
+
     </>
 
-      
+
   );
 };
 

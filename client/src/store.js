@@ -8,6 +8,7 @@ const store = configureStore({
     user: userReducer,
     games: gamesReducer,
     userNew:userNewReducer
+
   },
   middleware: [thunkMiddleware],
 });
