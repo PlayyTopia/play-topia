@@ -27,58 +27,58 @@ import Sidebar from './componentes/dashboard/Sidebar'
 import ProfileMenu from './componentes/dashboard/NavDashboard'
 
 const App = () => {
-  
+
   const [hideRouter1, setHideRouterUser] = useState(false);
   const [hideRouter2, setHideRouterAdmin] = useState(true);
 
 
-    const { loading, data, error } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
+  const { loading, data, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
 
-    useEffect(() => {
-      if(localStorage.auth != null){
-        dispatch(fetchUser());
-      }
-      }, [dispatch]);
-      
-     useEffect(() => {
-      if(localStorage.auth != null){
-      protectedIdRole()  
+  useEffect(() => {
+    if (localStorage.auth != null) {
+      dispatch(fetchUser());
     }
-    }, [data]);
-      
-   
-  
-      const protectedIdRole = async ()=> {
-      let ManegeRouters =[];
+  }, [dispatch]);
 
-        let role=data?.role
-        if(role ==1){
-          ManegeRouters= [true ,false,true ]
-        }else{
-          ManegeRouters= [false ,true,true ]
-        }
-        setHideRouterUser(ManegeRouters[0]);
-        setHideRouterAdmin(ManegeRouters[1]);
-      }
+  useEffect(() => {
+    if (localStorage.auth != null) {
+      protectedIdRole()
+    }
+  }, [data]);
 
 
-// ------------------user -------------------------- //
-   const AppRouter1 = () => {
+
+  const protectedIdRole = async () => {
+    let ManegeRouters = [];
+
+    let role = data?.role
+    if (role == 1) {
+      ManegeRouters = [true, false, true]
+    } else {
+      ManegeRouters = [false, true, true]
+    }
+    setHideRouterUser(ManegeRouters[0]);
+    setHideRouterAdmin(ManegeRouters[1]);
+  }
+
+
+  // ------------------user -------------------------- //
+  const AppRouter1 = () => {
     return (
       <Router>
-        <Navbar /> 
+        <Navbar />
         <Routes>
-          <Route index element={<Home />} />    
-          <Route path="SignUp" element={<SignUp />} />    
-          <Route path="Profile" element={<Profile />} />    
-          <Route path="LogIn" element={<LogIn />} />    
-          <Route path="BlogDetails" element={<BlogDetails />} />    
-          <Route path="Blog" element={<Blog />} />    
-          <Route path="Contact" element={<Contact />} />    
+          <Route index element={<Home />} />
+          <Route path="SignUp" element={<SignUp />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="LogIn" element={<LogIn />} />
+          <Route path="BlogDetails" element={<BlogDetails />} />
+          <Route path="Blog" element={<Blog />} />
+          <Route path="Contact" element={<Contact />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     );
   };
@@ -92,12 +92,12 @@ const App = () => {
     return (
       <Router>
         <Routes>
-        <Route path='PendingPosts' element={<PendingPosts/>}/>
-        <Route path='UsersInfo' element={<UsersInfo/>}/>
-        <Route path='ApproveTable' element={<ApproveTable/>}/>
-        <Route path='MainDashboard' element={<MainDashboard/>}/>
-        <Route path='Sidebar' element={<Sidebar/>}/>
-        <Route path='ProfileMenu' element={<ProfileMenu/>}/>
+          <Route path='PendingPosts' element={<PendingPosts />} />
+          <Route path='UsersInfo' element={<UsersInfo />} />
+          <Route path='ApproveTable' element={<ApproveTable />} />
+          <Route path='MainDashboard' element={<MainDashboard />} />
+          <Route path='Sidebar' element={<Sidebar />} />
+          <Route path='ProfileMenu' element={<ProfileMenu />} />
         </Routes>
       </Router>
     );
@@ -116,7 +116,7 @@ const App = () => {
 
   return (
 
- 
+
     <>
       {hideRouter1 ? null : (
         <>
@@ -132,10 +132,10 @@ const App = () => {
         </>
       )}
 
- 
+
     </>
 
-      
+
   );
 };
 

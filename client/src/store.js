@@ -6,7 +6,7 @@ import thunkMiddleware from 'redux-thunk';
 const store = configureStore({
   reducer: {
     user: userReducer,
-    games: gamesReducer
+    games: gamesReducer,
   },
   middleware: [thunkMiddleware],
 });

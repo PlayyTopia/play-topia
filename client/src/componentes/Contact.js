@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Contact = () => {
-    return (
+    return (~~
         <div>
             {/* <Navbar /> */}
             <section className="">
