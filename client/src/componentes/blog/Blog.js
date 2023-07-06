@@ -1,9 +1,27 @@
-import React from 'react'
+import React , { useState } from "react";
+
 import {Link} from 'react-router-dom';
 
-const Blog = () => {
 
-  const BlogCard = ({ image, date, CardTitle, CardDescription }) => {
+const Blog = () => {
+  const [image,setImg]=useState("")
+  const onChange = (e) => {
+    const files = e.target.files;
+    const file = files[0];
+    getBase64(file);
+    console.log(image);
+  };
+  const onLoad = (fileString) => {
+    setImg(fileString);
+  };
+  const getBase64 = (file) => {
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => {
+      onLoad(reader.result);
+    };
+  };
+  const BlogCard = ({ image,name, date, CardTitle, CardDescription }) => {
     return (
       <>
         <div className="w-full px-4 md:w-1/2 lg:w-1/3 ">
@@ -17,7 +35,11 @@ const Blog = () => {
               {date && (
                 <span className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary">
                   {date}
+                  {name &&(<span className="inline-block px-16 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary">
+                  {name}
+                </span>)}
                 </span>
+                
               )}
               <h3>
                 <a
@@ -102,36 +124,42 @@ Get started
           <div className="flex flex-wrap text-white -mx-4">
             <BlogCard
               date="Dec 22, 2023"
+              name="user name"
               CardTitle="Meet AutoManage, the best AI management tools"
               CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
               image="https://img.freepik.com/free-vector/gradient-lo-fi-illustration_23-2149375747.jpg?w=740&t=st=1688554099~exp=1688554699~hmac=31649ad40e9b62aa6c8c31ab08b26c27bf71b1cfa7f51537e3b677a7572db8a3"
             />
             <BlogCard
               date="Dec 22, 2023"
+              name="user name"
               CardTitle="Meet AutoManage, the best AI management tools"
               CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
               image="https://img.freepik.com/free-vector/cartoon-midnight-city-with-moonlit-public-garden_107791-15230.jpg?w=1380&t=st=1688554039~exp=1688554639~hmac=92ffa28fb78580738b633af50d7a64ce482d47d89be21065ed9402cee39e5219"
             />
             <BlogCard
               date="Dec 22, 2023"
+              name="user name"
               CardTitle="Meet AutoManage, the best AI management tools"
               CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
               image="https://img.freepik.com/free-vector/mountain-landscape-with-waterfall-night_107791-7316.jpg?w=1380&t=st=1688554450~exp=1688555050~hmac=c366fa9f76c3760daf81ccc65e1cc7c927e72afbba9fd3400fc5d36f6ca78874"
             />
               <BlogCard
               date="Dec 22, 2023"
+              name="user name"
               CardTitle="Meet AutoManage, the best AI management tools"
               CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
               image="https://img.freepik.com/free-vector/gradient-lo-fi-illustration_23-2149375747.jpg?w=740&t=st=1688554099~exp=1688554699~hmac=31649ad40e9b62aa6c8c31ab08b26c27bf71b1cfa7f51537e3b677a7572db8a3"
             />
             <BlogCard
               date="Dec 22, 2023"
+              name="user name"
               CardTitle="Meet AutoManage, the best AI management tools"
               CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
               image="https://img.freepik.com/free-vector/cartoon-midnight-city-with-moonlit-public-garden_107791-15230.jpg?w=1380&t=st=1688554039~exp=1688554639~hmac=92ffa28fb78580738b633af50d7a64ce482d47d89be21065ed9402cee39e5219"
             />
             <BlogCard
               date="Dec 22, 2023"
+              name="user name"
               CardTitle="Meet AutoManage, the best AI management tools"
               CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
               image="https://img.freepik.com/free-vector/mountain-landscape-with-waterfall-night_107791-7316.jpg?w=1380&t=st=1688554450~exp=1688555050~hmac=c366fa9f76c3760daf81ccc65e1cc7c927e72afbba9fd3400fc5d36f6ca78874"
@@ -156,6 +184,20 @@ Get started
     }}
   />
   <div className="editor mx-auto w-10/12 flex flex-col text-gray-800  p-4  max-w-2xl shadow-2xl">
+  {/* <div> */}
+                  {/* <label className="font-medium">صورة عن التصميم المطلوب</label> */}
+
+                  <input
+                    className="shadow mb-4 appearance-none border rounded w-full py-2 px-3 bg-gray-100 text-black leading-tight focus:outline-none focus:shadow-outline"
+                    type="file"
+                    placeholder="Table Image"
+                    name="guest_num"
+                    onChange={(e) => {
+                      onChange(e);
+                    }}
+                    accept="image/*"
+                  />
+                {/* </div> */}
     <input
       className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
       spellCheck="false"
@@ -168,60 +210,10 @@ Get started
       placeholder="Describe everything about this post here"
       defaultValue={""}
     />
-    {/* icons */}
-    <div className="icons flex text-gray-500 m-2">
-      <svg
-        className="mr-2 cursor-pointer bg-white hover:text-gray-700 border rounded-full p-1 h-7"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
-        />
-      </svg>
-      <svg
-        className="mr-2 cursor-pointer bg-white hover:text-gray-700 border rounded-full p-1 h-7"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M14.828 14.828a4 4 0 01-5.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-        />
-      </svg>
-      <svg
-        className="mr-2 cursor-pointer bg-white hover:text-gray-700 border rounded-full p-1 h-7"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-        />
-      </svg>
-      <div className="count ml-auto text-gray-400 text-xs font-semibold">
+  
+    <div className="count ml-auto text-gray-400 flex text-gray-500 m-2 text-xs font-semibold">
         0/300
       </div>
-    </div>
     {/* buttons */}
     <div className="buttons flex">
       <div className="btn border bg-white border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">
