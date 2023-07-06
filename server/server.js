@@ -9,6 +9,8 @@ const dbURI = "mongodb+srv://majdishomali1997:uVxsL6cXyv6CIZv8@cluster0.pacgw6a.
 const errorHandler = require('./middleware/500')
 const Protected = require('./middleware/Protected')
 const addPost = require('./routes/postRoutes/addPost')
+const postRoutes = require('./routes/postRoutes/Post')
+const addComment = require('./routes/postRoutes/Comment')
 
 const app = express();
 app.use(cors());
@@ -27,6 +29,8 @@ app.get("/", (req, res) => {
 app.use(userRouts);
 app.use(gameRouts);
 app.use(addPost)
+app.use(postRoutes)
+app.use(addComment)
 app.use('*',notFoundHandler);
 app.use(errorHandler);
 app.use(Protected)
