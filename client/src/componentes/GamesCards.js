@@ -7,7 +7,8 @@ import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import Rating from "./Rating";
 import TotalRating from "./TotalRating";
-
+import Icon from "@mdi/react";
+import { mdiHeartOutline, mdiHeart } from "@mdi/js";
 const GamesCards = () => {
   const [userId, setUserId] = useState(null);
 
@@ -52,7 +53,24 @@ const GamesCards = () => {
   //     }
   // })
   // };
+  const handleFAv = async (card) => {
+    let UsersIdFavorite = [...(card.UsersIdFavorite || [])];
 
+    const indexToRemove = UsersIdFavorite.indexOf(userId);
+    if (indexToRemove !== -1) {
+      UsersIdFavorite.splice(indexToRemove, 1);
+    } else {
+      UsersIdFavorite.push(userId);
+    }
+
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/updateGameFav/${card._id}`,
+        { UsersIdFavorite }
+      );
+      dispatch(fetchgamesS());
+    } catch (error) {}
+  };
   return (
     <>
       {/* <Button
@@ -65,8 +83,26 @@ const GamesCards = () => {
           return (
             <div
               key={e._id}
-              className="w-72 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+              className="relative w-72 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
             >
+              {e.UsersIdFavorite.indexOf(userId) === -1 ? (
+                <Icon
+                  onClick={() => handleFAv(e)}
+                  className="absolute right-2 top-2 "
+                  color="red"
+                  path={mdiHeartOutline}
+                  size={1.5}
+                />
+              ) : (
+                <Icon
+                  onClick={() => handleFAv(e)}
+                  className="absolute right-2 top-2 "
+                  color="red"
+                  path={mdiHeart}
+                  size={1.5}
+                />
+              )}
+
               <a href="#">
                 <img
                   className=" rounded-t-lg w-full"

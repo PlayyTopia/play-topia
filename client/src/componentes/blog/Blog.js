@@ -236,15 +236,15 @@ Get started
 </>
 
       {/* //////////////////////////////// */}
-      <div  className="container mx-auto flex justify-center items-center ">
+      <div  className="container mx-auto flex justify-center items-center  ">
   <div className=" py-16 w-9/12">
     <div className=" relative flex items-center justify-center">
       <img
         src="https://img.freepik.com/free-vector/old-stone-well-with-drinking-water-hill-summer-night-landscape-with-full-moon-light-vintage-rural-well-with-wooden-roof-pulley-bucket-rope-farm-village-cartoon-illustration_107791-5967.jpg?w=1380&t=st=1688556678~exp=1688557278~hmac=3b2870f1558f1a37c0b561e87f1c9859b8be9c651f8cea3bdcf9e80113275978"
         alt="dining"
-        className="w-full h-full absolute z-0  xl:block rounded-3xl"
+        className="w-full h-full absolute z-1   xl:block rounded-3xl"
       />
-      <div className="bg-white bg-opacity-30 rounded-3xl lg:py-36 py-60 md:px-20  px-10 sm:px-4 flex flex-col items-center justify-center relative z-50">
+      <div className="bg-white bg-opacity-30 rounded-3xl lg:py-36 py-60 md:px-20  px-10 sm:px-4 flex flex-col items-center justify-center relative z-1">
         <h1 className="text-4xl font-semibold leading-9 text-white text-center">
         CONNECT WITH US
 FOR GAMING UPDATE.       </h1>

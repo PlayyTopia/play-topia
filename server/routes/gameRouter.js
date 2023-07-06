@@ -5,6 +5,6 @@ const gameController = require("../controllers/gameController");
 router.post("/api/games", gameController.newGame);
 router.get("/api/games" , gameController.allGames);
 router.put("/api/games/:id" , gameController.updateGame);
-router.get("/api/favoriteGames/:id" , gameController.favoriteGames);
+router.put("/api/updateGameFav/:id" , gameController.updateGameFav);
 
 module.exports = router;
