@@ -13,8 +13,8 @@ import Navbar from './componentes/NavBar';
 import Profile from './componentes/Profile';
 import Home from './componentes/Home'
 import Footer from './componentes/footer';
-import Blog from './componentes/blog/Blog';
-import BlogDetails from './componentes/blog/BlogDetails';
+// import Blog from './componentes/blog/Blog';
+// import BlogDetails from './componentes/blog/BlogDetails';
 import Contact from './componentes/Contact';
 import Games from './pages/dashboard/Games';
 
@@ -48,7 +48,7 @@ const App = () => {
 
   useEffect(() => {
     if (localStorage.auth != null) {
-      dispatch(fetchUser());
+      dispatch(fetchUserNew());
     }
   }, [dispatch]);
 
@@ -94,8 +94,8 @@ const App = () => {
           <Route path="SignUp" element={<SignUp />} />
           <Route path="Profile" element={<Profile />} />
           <Route path="LogIn" element={<LogIn />} />
-          <Route path="BlogDetails" element={<BlogDetails />} />
-          <Route path="Blog" element={<Blog />} />
+          {/* <Route path="BlogDetails" element={<BlogDetails />} />
+          <Route path="Blog" element={<Blog />} /> */}
           <Route path="Contact" element={<Contact />} />
           <Route path="Games" element={<Games />} />
         </Routes>

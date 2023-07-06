@@ -1,9 +1,9 @@
-import React from 'react'
+// import React from 'react'
 
-function PostFunction() {
-  return (
+// function PostFunction() {
+//   return (
     
-  )
-}
+//   )
+// }
 
-export default PostFunction
+// export default PostFunction

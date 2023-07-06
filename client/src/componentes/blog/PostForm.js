@@ -3,25 +3,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 function PostForm() {
   //   const [userId, setUserId] = useState(null);
-  const [image, setImg] = useState("");
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [userId, setUserId] = useState("");
+  // const [image, setImg] = useState("");
+  // const [title, setTitle] = useState("");
+  // const [content, setContent] = useState("");
+  // const [userId, setUserId] = useState("");
 
-  const {
-    loading: userLoading,
-    data: userData,
-    error: userError,
-  } = useSelector((state) => state.user);
+  // const {
+  //   loading: userLoading,
+  //   data: userData,
+  //   error: userError,
+  // } = useSelector((state) => state.user);
 
-  const onTitleChanged = (e) => setTitle(e.target.value);
-  const onContentChanged = (e) => setContent(e.target.value);
+  // const onTitleChanged = (e) => setTitle(e.target.value);
+  // const onContentChanged = (e) => setContent(e.target.value);
 
-  const onSavePostClicked = () => {
-    useEffect(() => {
-      setUserId(userData?.id);
-    }, [userData]);
-  };
+  // const onSavePostClicked = () => {
+  //   useEffect(() => {
+  //     setUserId(userData?.id);
+  //   }, [userData]);
+  // };
   return (
     <form onS>
       <div className="heading text-center font-bold text-2xl m-5 text-white">
@@ -38,7 +38,7 @@ function PostForm() {
           type="file"
           placeholder="Table Image"
           name="guest_num"
-          onChange={(e) => {(e)=>setImg(e.target.file)}}
+          // onChange={(e) => {(e)=>setImg(e.target.file)}}
           accept="image/*"
         />
         <input
