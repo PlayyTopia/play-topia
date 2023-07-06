@@ -8,6 +8,7 @@ const notFoundHandler = require('./middleware/404');
 const dbURI = "mongodb+srv://majdishomali1997:uVxsL6cXyv6CIZv8@cluster0.pacgw6a.mongodb.net/Playtopia"
 const errorHandler = require('./middleware/500')
 const Protected = require('./middleware/Protected')
+const addPost = require('./routes/postRoutes/addPost')
 
 const app = express();
 app.use(cors());
@@ -25,9 +26,11 @@ app.get("/", (req, res) => {
 
 app.use(userRouts);
 app.use(gameRouts);
+app.use(addPost)
 app.use('*',notFoundHandler);
 app.use(errorHandler);
 app.use(Protected)
+
 
 
 module.exports = {
