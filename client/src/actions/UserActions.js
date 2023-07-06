@@ -12,6 +12,7 @@ export const fetchUser = createAsyncThunk(
     },
   }
     );
+
     return response.data;
   }
 );
@@ -49,6 +50,7 @@ export const usersLogin = createAsyncThunk(
       "http://localhost:5000/api/usersLogin",
       userData
     );
+    console.log(response.data)
     return response.data;
   }
 );
@@ -72,41 +74,41 @@ export const protectedData  = createAsyncThunk(
   }
 );
 
-const userSlice = createSlice({
-  name: "user",
-  initialState: {
-    loading: false,
-    data: [],
-    error: null,
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data = action.payload;
-      })
-      .addCase(fetchUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      })
-      .addCase(addUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(addUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.data.push(action.payload); // Add the new user to the data array
-      })
-      .addCase(addUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message;
-      });
-  },
-});
+// const userSlice = createSlice({
+//   name: "user",
+//   initialState: {
+//     loading: false,
+//     data: [],
+//     error: null,
+//   },
+//   reducers: {},
+//   extraReducers: (builder) => {
+//     builder
+//       .addCase(fetchUser.pending, (state) => {
+//         state.loading = true;
+//         state.error = null;
+//       })
+//       .addCase(fetchUser.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.data = action.payload;
+//       })
+//       .addCase(fetchUser.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.error.message;
+//       })
+//       .addCase(addUser.pending, (state) => {
+//         state.loading = true;
+//         state.error = null;
+//       })
+//       .addCase(addUser.fulfilled, (state, action) => {
+//         state.loading = false;
+//         state.data.push(action.payload); // Add the new user to the data array
+//       })
+//       .addCase(addUser.rejected, (state, action) => {
+//         state.loading = false;
+//         state.error = action.error.message;
+//       });
+//   },
+// });
 
-export default userSlice.reducer;
+// export default userSlice.reducer;

@@ -39,6 +39,10 @@ const gameSchema = new Schema({
         type : Array,
         required : false,
     },
+    UsersIdFavorite:{
+        type : Array,
+        required : false,
+    },
 
     },
      {timestamps : true}

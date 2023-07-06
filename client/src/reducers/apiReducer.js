@@ -1,13 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchGames } from '../actions/ApiActions';
-import { fetchgamesS } from '../actions/ApiActions';
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchGames } from "../actions/ApiActions";
+import { fetchgamesS } from "../actions/ApiActions";
 
 const gamesSlice = createSlice({
-  name: 'games',
+  name: "games",
   initialState: {
     loading: false,
     data: null,
-    error: '',
+    error: "",
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -18,7 +18,7 @@ const gamesSlice = createSlice({
       .addCase(fetchGames.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
-        state.error = '';
+        state.error = "";
       })
       .addCase(fetchGames.rejected, (state, action) => {
         state.loading = false;
@@ -31,7 +31,7 @@ const gamesSlice = createSlice({
       .addCase(fetchgamesS.fulfilled, (state, action) => {
         state.loading = false;
         state.data = action.payload;
-        state.error = '';
+        state.error = "";
       })
       .addCase(fetchgamesS.rejected, (state, action) => {
         state.loading = false;
