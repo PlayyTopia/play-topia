@@ -4,14 +4,15 @@ import { fetchUser, addUser } from "../actions/UserActions";
 import { useEffect } from "react";
 import { Button } from "@material-tailwind/react";
 import GamesCards from "./GamesCards";
+import { fetchUserNew } from '../actions/UserActions';
+
 const Profile = () => {
   const [userId, setUserId] = useState(null);
-  
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchUser());
-  //   setUserId(userData?.id)
-  // }, [dispatch]);
+
+  const dispatch = useDispatch();
+//   useEffect(() => {
+//     dispatch(fetchUserNew());
+//   }, []);
 
   const {
     loading: userLoading,
@@ -25,7 +26,6 @@ const Profile = () => {
     setUserId(userData?.id);
   }, [userData]);
 
-  console.log(userId);
 
 
   return (

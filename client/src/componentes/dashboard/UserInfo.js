@@ -29,8 +29,8 @@ const UsersInfo = () => {
       });
 
       console.log(response.data);
-      setPersons(response.data);
-      setFilterDataUsers(response.data);
+      setPersons(response.data.data);
+      setFilterDataUsers(response.data.data);
     } catch (error) {
       console.error("Error inserting data:", error);
     }
@@ -69,6 +69,8 @@ const UsersInfo = () => {
   const endIndexUsers = startIndexUsers + itemsPerPage;
 
   slicedArrayUsers = FilterDataUsers.slice(startIndexUsers, endIndexUsers);
+  console.log(FilterDataUsers)
+
 
   const handlePageChangeUsers = (event, pageNumber) => {
     setCurrentPageUsers(pageNumber);
