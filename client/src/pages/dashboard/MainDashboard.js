@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Statistics from './Statistics';
+import Statistics from '../../pages/dashboard/Statistics';
 
 
 

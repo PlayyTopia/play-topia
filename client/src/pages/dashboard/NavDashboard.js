@@ -4,7 +4,7 @@ import { useContext } from "react";
 import { mdiSilverwareForkKnife } from '@mdi/js';
 import { mdiAccountMultipleOutline } from '@mdi/js';
 import { mdiInbox } from '@mdi/js';
-import { UserContext } from './UserContext';
+import { UserContext } from '../../UserContext';
 import './dashboard.css'
 // import logo from '../../Images/logooo.png'
 import {

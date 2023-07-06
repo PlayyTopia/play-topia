@@ -3,7 +3,7 @@ import Icon from '@mdi/react';
 import { mdiHandshakeOutline  } from '@mdi/js';
 import { mdiAccountMultipleOutline } from '@mdi/js';
 import { mdiInformationOutline,mdiShieldCrownOutline  } from '@mdi/js';
-import { UserContext } from './UserContext';
+import { UserContext } from '../../UserContext';
 import React,{useState,useEffect,useContext} from "react";
 import { mdiTableFurniture } from '@mdi/js';
 import { mdiCashClock } from '@mdi/js';
@@ -77,7 +77,7 @@ function handleLogOut(){
         </div>
         <List>
           <Link to='/'>
-          <ListItem className="hover:bg-[#E8AA42]">
+          <ListItem className="hover:bg-[#babccf] hover:text-white">
             <ListItemPrefix>
               <PresentationChartBarIcon className="h-5 w-5" />
             </ListItemPrefix>
@@ -86,17 +86,17 @@ function handleLogOut(){
           </Link>
 
 
-          <Link to='/ListAdmin'>
+          {/* <Link to='/ListAdmin'>
            <ListItem className="hover:bg-[#E8AA42]">
             <ListItemPrefix>
             <Icon path={mdiShieldCrownOutline } size={1} />
             </ListItemPrefix>
             <a style={{color:'black'}}> Admins list </a>
           </ListItem>
-          </Link>
+          </Link> */}
 
            <Link to='/ListUser'>
-           <ListItem className="hover:bg-[#E8AA42]">
+           <ListItem className="hover:bg-[#babccf] hover:text-white">
             <ListItemPrefix>
             <Icon path={mdiAccountMultipleOutline} size={1} />
             </ListItemPrefix>
@@ -105,25 +105,25 @@ function handleLogOut(){
           </Link>
 
           <Link to='/ListRestaurant'>
-          <ListItem className="hover:bg-[#E8AA42]">
+          <ListItem className="hover:bg-[#babccf] hover:text-white">
             <ListItemPrefix>
             <Icon path={mdiHandshakeOutline } size={1} />
             </ListItemPrefix>
-            <a style={{color:'black'}}> beneficiary List </a>
+            <a style={{color:'black'}}> User's Post </a>
           </ListItem>
           </Link>
 
-          <Link to='/EditAboutContact'>
+          {/* <Link to='/EditAboutContact'>
           <ListItem className="hover:bg-[#E8AA42]">
             <ListItemPrefix>
             <Icon path={mdiInformationOutline} size={1} />
             </ListItemPrefix>
             <a style={{color:'black'}}> Edit About </a>
           </ListItem>
-          </Link>
+          </Link> */}
 
           <Link to='/AcceptTables'>
-          <ListItem className="hover:bg-[#E8AA42]">
+          <ListItem className="hover:bg-[#babccf] hover:text-white">
             <ListItemPrefix>
             <Icon path={mdiTableFurniture} size={1} />
             </ListItemPrefix>
@@ -131,16 +131,16 @@ function handleLogOut(){
           </ListItem>
           </Link>
 
-          <Link to='/PaymentsInfo'>
+          {/* <Link to='/PaymentsInfo'>
           <ListItem className="hover:bg-[#E8AA42]">
             <ListItemPrefix>
             <Icon path={mdiCashClock} size={1} />
             </ListItemPrefix>
             <a style={{color:'black'}}> payments </a>
           </ListItem>
-          </Link>
+          </Link> */}
 
-         <Link to='/Chat'>
+         {/* <Link to='/Chat'>
          <ListItem className="hover:bg-[#E8AA42]">
             <ListItemPrefix>
               <InboxIcon className="h-5 w-5" />
@@ -149,8 +149,8 @@ function handleLogOut(){
             {/* <ListItemSuffix>
               <Chip value="14" size="sm" variant="white" color="blue-gray" className="rounded-full" />
             </ListItemSuffix> */}
-          </ListItem>
-          </Link>
+          {/* </ListItem>
+          </Link>  */}
 
 {/* 
          <Link to="UserProfile">
@@ -171,7 +171,7 @@ function handleLogOut(){
           </ListItem>
             </Link> */}
            <button onClick={handleLogOut}>
-           <ListItem className="hover:bg-amber-500">
+           <ListItem className="hover:bg-[#babccf] hover:text-white">
             <ListItemPrefix>
               <PowerIcon className="h-5 w-5" />
             </ListItemPrefix>
