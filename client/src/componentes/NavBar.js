@@ -185,7 +185,7 @@ export default function NavbarA() {
  
   return (
     <Navbar className="py-2 lg:py-4 bg-[#10143d]
-      sticky top-0">
+      sticky top-0 z-5">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
       <Link to="/"> <Typography
           as="a"
