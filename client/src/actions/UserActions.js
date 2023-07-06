@@ -7,11 +7,12 @@ export const fetchUserNew = createAsyncThunk(
   async (token) => {
     const response = await axios.get(`http://localhost:5000/api/userNew`,
     {
-    headers: {
-      Authorization: token,
-    },
-  }
+      headers: {
+        Authorization: token,
+      },
+    }
     );
+    console.log(response.data);
     return response.data;
   }
 );
