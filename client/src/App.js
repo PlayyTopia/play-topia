@@ -19,12 +19,22 @@ import Contact from './componentes/Contact';
 
 
 // ------------------dashboard -------------------------- //
-import ApproveTable from './componentes/dashboard/ApproveTable'
-import PendingPosts from './componentes/dashboard/PendingPosts'
-import UsersInfo from './componentes/dashboard/UserInfo'
-import MainDashboard from './componentes/dashboard/MainDashboard'
-import Sidebar from './componentes/dashboard/Sidebar'
-import ProfileMenu from './componentes/dashboard/NavDashboard'
+// import ApproveTable from './componentes/dashboard/ApproveTable'
+// import PendingPosts from './componentes/dashboard/PendingPosts'
+// import UsersInfo from './componentes/dashboard/UserInfo'
+// import MainDashboard from './componentes/dashboard/MainDashboard'
+// import Sidebar from './componentes/dashboard/Sidebar'
+// import ProfileMenu from './componentes/dashboard/NavDashboard'
+import Sidebar from "./pages/dashboard/Sidebar";
+import NavListMenuD from "./pages/dashboard/NavDashboard";
+import MainDashboard from "./pages/dashboard/MainDashboard";
+import EditAboutContact from "./pages/dashboard/EditAboutUs";
+import UserInfo from "./componentes/dashboard/UserInfo"
+import ApproveTable from "./componentes/dashboard/ApproveTable";
+// import AdminInfo from "./components/dashboard/AdminInfo";
+import  Chat  from "./pages/dashboard/Chat";
+import PendingPosts from "./componentes/dashboard/PendingPosts";
+// import PaymentsInfo from "./components/dashboard/Payment"
 
 const App = () => {
   
@@ -90,16 +100,33 @@ const App = () => {
   //-----------------dashboard----------------------------------------//
   const AppRouter2 = () => {
     return (
+      // <Router>
+      //   <Routes>
+      //   <Route path='PendingPosts' element={<PendingPosts/>}/>
+      //   <Route path='UsersInfo' element={<UsersInfo/>}/>
+      //   <Route path='ApproveTable' element={<ApproveTable/>}/>
+      //   <Route index element={<MainDashboard/>}/>
+      //   <Route path='Sidebar' element={<Sidebar/>}/>
+      //   <Route path='ProfileMenu' element={<ProfileMenu/>}/>
+      //   </Routes>
+      // </Router>
       <Router>
+      <Sidebar />
+      <div style={{ width: "100%" }}>
+        <NavListMenuD />
         <Routes>
-        <Route path='PendingPosts' element={<PendingPosts/>}/>
-        <Route path='UsersInfo' element={<UsersInfo/>}/>
-        <Route path='ApproveTable' element={<ApproveTable/>}/>
-        <Route path='MainDashboard' element={<MainDashboard/>}/>
-        <Route path='Sidebar' element={<Sidebar/>}/>
-        <Route path='ProfileMenu' element={<ProfileMenu/>}/>
+          <Route index element={<MainDashboard />} />
+          <Route path="ListUser" element={<UserInfo />} />
+          <Route path="EditAboutContact" element={<EditAboutContact />} />
+          <Route path="Chat" element={<Chat />} />
+          {/* <Route path="UserProfile" element={<UserProfile />} /> */}
+          <Route path="ListRestaurant" element={<ApproveTable />} />
+          {/* <Route path="ListAdmin" element={<AdminInfo />} /> */}
+          <Route path="AcceptTables" element={<PendingPosts />} />
+          {/* <Route path="PaymentsInfo" element={<PaymentsInfo />} /> */}
         </Routes>
-      </Router>
+      </div>
+    </Router>
     );
   };
 
