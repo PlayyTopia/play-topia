@@ -24,7 +24,7 @@ const TopRated = () => {
       useEffect(() => {
         getUserInfo()
       }, []);
-
+console.log(userId)
 
 
   const [apiData, setApiData] = useState(null);

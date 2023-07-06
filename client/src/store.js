@@ -1,12 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userReducer from './reducers/userReducer';
-import gamesReducer from './reducers/apiReducer';
+import userReducer from './actions/AllUsersActions';
+import gamesReducer from './actions/ApiActions';
 import thunkMiddleware from 'redux-thunk';
-
+import userNewReducer from './actions/UserActions'
 const store = configureStore({
   reducer: {
     user: userReducer,
-    games: gamesReducer
+    games: gamesReducer,
+    userNew:userNewReducer
   },
   middleware: [thunkMiddleware],
 });
