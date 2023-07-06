@@ -57,15 +57,8 @@ const Blog = () => {
               </div>
             </div>
           </div>
-
           <div className="flex flex-wrap text-white -mx-4">
-            <BlogCard
-              date="Dec 22, 2023"
-              name="user name"
-              CardTitle="Meet AutoManage, the best AI management tools"
-              CardDescription="Lorem Ipsum is simply dummy text of the printing and typesetting industry."
-              image="https://img.freepik.com/free-vector/gradient-lo-fi-illustration_23-2149375747.jpg?w=740&t=st=1688554099~exp=1688554699~hmac=31649ad40e9b62aa6c8c31ab08b26c27bf71b1cfa7f51537e3b677a7572db8a3"
-            />
+            <BlogCard/>
           </div>
         </div>
       </section>

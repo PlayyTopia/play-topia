@@ -89,16 +89,14 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-
-          <Route index element={<Home />} />    
-          <Route path="SignUp" element={<SignUp />} />    
-          <Route path="Profile" element={<Profile />} />    
-          <Route path="LogIn" element={<LogIn />} />    
-          <Route path="BlogDetails" element={<BlogDetails />} />    
-          <Route path="Blog" element={<Blog />} />    
-          <Route path="Contact" element={<Contact />} />    
-          <Route path="Games" element={<Games />} />    
-          <Route path="About" element={<About />} />    
+          <Route index element={<Home />} />
+          <Route path="SignUp" element={<SignUp />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="LogIn" element={<LogIn />} />
+          <Route path="BlogDetails/:id" element={<BlogDetails />} />
+          <Route path="Blog" element={<Blog />} />
+          <Route path="Contact" element={<Contact />} />
+          <Route path="Games" element={<Games />} />
         </Routes>
         <Footer />
       </Router>
