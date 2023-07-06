@@ -55,24 +55,24 @@ export const usersLogin = createAsyncThunk(
   }
 );
 
-export const protectedData  = createAsyncThunk(
-  "user/protectedData",
-  async (token) => {
-   let  response;
-    try {
-      if (token) {
-         response = await axios.get("http://localhost:5000/protected", {
-          headers: {
-            Authorization: token,
-          },
-        });
-      }
-    } catch (error) {
-      console.error(error);
-    }
-    return response.data;
-  }
-);
+// export const protectedData  = createAsyncThunk(
+//   "user/protectedData",
+//   async (token) => {
+//    let  response;
+//     try {
+//       if (token) {
+//          response = await axios.get("http://localhost:5000/protected", {
+//           headers: {
+//             Authorization: token,
+//           },
+//         });
+//       }
+//     } catch (error) {
+//       console.error(error);
+//     }
+//     return response.data;
+//   }
+// );
 
 export const fetchUserNew = createAsyncThunk(
   "userNew/fetchUserNew",

@@ -44,15 +44,15 @@ const Rating = ({ cardId, card, UserIdA, rating }) => {
       0
     );
     const avg = newrate.length === 0 ? 1 : newrate?.length;
-
+   const topRated = newrate.length *(sum / avg)
     try {
       const updatedCard = {
         UsersIdRate: ids,
         rate: newrate,
         rating: sum / avg,
         cardId: cardId,
+        topRated:topRated
       };
-
       const response = await dispatch(updategames(updatedCard));
       dispatch(fetchgamesS());
       showSuccessAlert(newrate);

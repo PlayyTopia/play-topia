@@ -25,6 +25,7 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
 
+      
       .addCase(addUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -37,9 +38,6 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-
-
-
 
   },
 });

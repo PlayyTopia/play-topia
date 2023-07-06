@@ -9,21 +9,29 @@ import Rating from "./Rating";
 import TotalRating from "./TotalRating";
 import Icon from "@mdi/react";
 import { mdiHeartOutline, mdiHeart } from "@mdi/js";
+import { fetchUserNew } from '../actions/UserActions';
+
 const GamesCards = () => {
+  const dispatch = useDispatch();
+
   const [userId, setUserId] = useState(null);
+  const [userData ,setUserData]= useState(null)
 
-  const {
-    loading: userLoading,
-    data: userData,
-    error: userError,
-  } = useSelector((state) => state.user);
-
-  useEffect(() => {
-    setUserId(userData?.id);
-  }, [userData, fetchgamesS]);
+  const getUserInfo = async ()=>{
+    try {
+        const token = localStorage.getItem("auth");
+        const response = await dispatch(fetchUserNew(token)); 
+        setUserData(response.payload[0])
+        setUserId(response.payload[0]._id)       
+      } catch (error) {
+        console.error('Failed to add Pokemon:', error);
+      }
+}
+      useEffect(() => {
+        getUserInfo()
+      }, []);
 
   const [apiData, setApiData] = useState(null);
-  const dispatch = useDispatch();
 
   const {
     loading: gamesLoading,

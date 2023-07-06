@@ -30,7 +30,7 @@ const Profile = () => {
 
   return (
     <>
-   <GamesCards/>  
+   {/* <GamesCards/>   */}
     </>
   );
 };

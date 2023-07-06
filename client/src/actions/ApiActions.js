@@ -39,6 +39,7 @@ export const updategames = createAsyncThunk(
         UsersIdRate: updatedCard.UsersIdRate,
         rate: updatedCard.rate,
         rating: updatedCard.rating,
+        topRated:updatedCard.topRated
       };
 
       let cardId = updatedCard.cardId;
@@ -63,3 +64,5 @@ export const updategamesFav = createAsyncThunk(
     } catch (error) {}
   }
 );
+
+

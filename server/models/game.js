@@ -43,7 +43,11 @@ const gameSchema = new Schema({
         type : Array,
         required : false,
     },
-
+    topRated:{
+        type : Number,
+        required : false,
+        default : 0,
+    },
     },
      {timestamps : true}
     )
