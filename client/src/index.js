@@ -11,7 +11,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <div className="bg-[#10143d] font-serif">
-      <App/>
+        <App />
       </div>
     </Provider>
   </React.StrictMode>,
