@@ -4,7 +4,7 @@ import axios from 'axios';
 import React, { useContext } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, addUser } from '../../actions/UserActions';
+import { fetchUser, addUser } from '../../actions/AllUsersActions';
 
 export default function SignUp() {
   const dispatch = useDispatch();

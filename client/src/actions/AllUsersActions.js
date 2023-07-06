@@ -1,6 +1,47 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { fetchUser } from "../actions/UserActions";
-import { addUser } from "../actions/UserActions";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export const fetchUser = createAsyncThunk(
+    "user/fetchUser",
+    async () => {
+      const token = localStorage.getItem("auth");
+      const response = await axios.get("http://localhost:5000/api/users",
+      {
+      headers: {
+        Authorization: token,
+      },
+    }
+      );
+  
+      return response.data;
+    }
+  );
+
+  export const addUser = createAsyncThunk(
+    "user/addUser",
+    async (userData) => {
+      // Perform the necessary logic to add the new user to the API or database
+      const response = await axios.post(
+        "http://localhost:5000/api/users",
+        userData
+      );
+      return response.data;
+    }
+  );
+  export const usersLogin = createAsyncThunk(
+    "user/usersLogin",
+    async (userData) => {
+      // Perform the necessary logic to add the new user to the API or database
+      const response = await axios.post(
+        "http://localhost:5000/api/usersLogin",
+        userData
+      );
+      console.log(response.data)
+      return response.data;
+    }
+  );
+
+
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -25,6 +66,7 @@ const userSlice = createSlice({
         state.error = action.error.message;
       })
 
+      
       .addCase(addUser.pending, (state) => {
         state.loading = true;
         state.error = null;
@@ -37,9 +79,6 @@ const userSlice = createSlice({
         state.loading = false;
         state.error = action.error.message;
       });
-
-
-
 
   },
 });

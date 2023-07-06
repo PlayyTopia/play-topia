@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { fetchUser, protectedData } from './actions/UserActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserNew } from './actions/UserActions';
 
 
 
@@ -15,7 +16,7 @@ import Footer from './componentes/footer';
 import Blog from './componentes/blog/Blog';
 import BlogDetails from './componentes/blog/BlogDetails';
 import Contact from './componentes/Contact';
-
+import Games from './pages/dashboard/Games';
 
 
 // ------------------dashboard -------------------------- //
@@ -42,8 +43,7 @@ const App = () => {
   const [hideRouter2, setHideRouterAdmin] = useState(true);
 
 
-  const { loading, data, error } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
 
   useEffect(() => {
@@ -52,26 +52,35 @@ const App = () => {
     }
   }, [dispatch]);
 
-  useEffect(() => {
-    if (localStorage.auth != null) {
-      protectedIdRole()
+
+     useEffect(() => {
+      if(localStorage.auth != null){ 
+      getUserInfo()
     }
-  }, [data]);
+    }, []);
+      
+    const [userData ,setUserData]= useState(null)
+   const getUserInfo = async ()=>{
+    try {
+        const token = localStorage.getItem("auth");
+        const response = await dispatch(fetchUserNew(token)); 
+        setUserData(response.payload[0]) 
+        let ManegeRouters =[];
+
+        let role=response.payload[0].role
+        if(role ==1){
+          ManegeRouters= [true ,false,true ]
+        }else{
+          ManegeRouters= [false ,true,true ]
+        }
+        setHideRouterUser(ManegeRouters[0]);
+        setHideRouterAdmin(ManegeRouters[1]);      
+      } catch (error) {
+        console.error('Failed to add Pokemon:', error);
+      }
+}
 
 
-
-  const protectedIdRole = async () => {
-    let ManegeRouters = [];
-
-    let role = data?.role
-    if (role == 1) {
-      ManegeRouters = [true, false, true]
-    } else {
-      ManegeRouters = [false, true, true]
-    }
-    setHideRouterUser(ManegeRouters[0]);
-    setHideRouterAdmin(ManegeRouters[1]);
-  }
 
 
   // ------------------user -------------------------- //
@@ -80,13 +89,17 @@ const App = () => {
       <Router>
         <Navbar />
         <Routes>
-          <Route index element={<Home />} />
-          <Route path="SignUp" element={<SignUp />} />
-          <Route path="Profile" element={<Profile />} />
-          <Route path="LogIn" element={<LogIn />} />
-          <Route path="BlogDetails" element={<BlogDetails />} />
-          <Route path="Blog" element={<Blog />} />
-          <Route path="Contact" element={<Contact />} />
+
+          <Route index element={<Home />} />    
+          <Route path="SignUp" element={<SignUp />} />    
+          <Route path="Profile" element={<Profile />} />    
+          <Route path="LogIn" element={<LogIn />} />    
+          <Route path="BlogDetails" element={<BlogDetails />} />    
+          <Route path="Blog" element={<Blog />} />    
+          <Route path="Contact" element={<Contact />} />    
+          <Route path="Games" element={<Games />} />    
+ element={<Contact />} />
+
         </Routes>
         <Footer />
       </Router>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchUserNew } from '../actions/UserActions';
 
 const Contact = () => {
@@ -19,7 +19,7 @@ const Contact = () => {
         getUserInfo()
     }, []);
 
-
+console.log(userData)
 
     return (
         <div>
