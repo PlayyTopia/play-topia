@@ -12,16 +12,16 @@ const allGames = (req, res) => {
       });
   };
 
-  // const favoriteGames = (req, res) => {
-  //   const userId = req.params.id;
-  //   Game.find({ UsersIdFavorite: { $in: [userId] } })
-  //     .then((data) => {
-  //       res.json(data);
-  //     })
-  //     .catch((error) => {
-  //       errorHandler(error, req, res);
-  //     });
-  // };
+  const favoriteGames = (req, res) => {
+    const userId = req.params.id;
+    Game.find({ UsersIdFavorite: { $in: [userId] } })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((error) => {
+        errorHandler(error, req, res);
+      });
+  };
 
   const newGame =  async (req, res) => {
     const { title, thumbnail , short_description ,game_url,freetogame_profile_url } = req.body;
@@ -56,6 +56,7 @@ module.exports = {
     allGames,
     newGame,
     updateGame,
-    updateGameFav
+    updateGameFav,
+    favoriteGames,
   }; 
   
