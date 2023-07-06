@@ -30,7 +30,6 @@ const App = () => {
   
   const [hideRouter1, setHideRouterUser] = useState(false);
   const [hideRouter2, setHideRouterAdmin] = useState(true);
-  const [hideRouter3, setHideRouterProvider] = useState(true);
 
 
     const { loading, data, error } = useSelector((state) => state.user);
@@ -38,11 +37,15 @@ const App = () => {
 
 
     useEffect(() => {
+      if(localStorage.auth != null){
         dispatch(fetchUser());
+      }
       }, [dispatch]);
       
      useEffect(() => {
+      if(localStorage.auth != null){
       protectedIdRole()  
+    }
     }, [data]);
       
    
@@ -53,14 +56,11 @@ const App = () => {
         let role=data?.role
         if(role ==1){
           ManegeRouters= [true ,false,true ]
-        }else if (role ==2){
-          ManegeRouters= [true ,true,false]
         }else{
           ManegeRouters= [false ,true,true ]
         }
         setHideRouterUser(ManegeRouters[0]);
         setHideRouterAdmin(ManegeRouters[1]);
-        setHideRouterProvider(ManegeRouters[2]);
       }
 
 
@@ -110,17 +110,7 @@ const App = () => {
 
 
 
-  const AppRouter3 = () => {
-    return (
-      <Router>
-        {/* <NavListMenu /> */}
-        {/* <Routes>
-          <Route path="ContactUs" element={<Contact />} />
-          <Route path="About" element={<About />} />
-        </Routes> */}
-      </Router>
-    );
-  };
+
 
   return (
 
@@ -140,11 +130,6 @@ const App = () => {
         </>
       )}
 
-      {hideRouter3 ? null : (
-        <>
-          <AppRouter3 />
-        </>
-      )}
  
     </>
 

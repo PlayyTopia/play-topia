@@ -9,9 +9,7 @@ import Rating from "./Rating";
 import TotalRating from "./TotalRating";
 
 const GamesCards = () => {
-
   const [userId, setUserId] = useState(null);
-
 
   const {
     loading: userLoading,
@@ -19,12 +17,9 @@ const GamesCards = () => {
     error: userError,
   } = useSelector((state) => state.user);
 
-
-
   useEffect(() => {
     setUserId(userData?.id);
-  }, [userData,fetchgamesS]);
-
+  }, [userData, fetchgamesS]);
 
   const [apiData, setApiData] = useState(null);
   const dispatch = useDispatch();
@@ -35,7 +30,6 @@ const GamesCards = () => {
     error: gamesError,
   } = useSelector((state) => state.games);
 
-
   useEffect(() => {
     dispatch(fetchgamesS());
   }, [dispatch]);
@@ -44,20 +38,20 @@ const GamesCards = () => {
     setApiData(gamesData);
   }, [gamesData]);
 
-
-//   const handleAdd = async () => {
-//     apiData.map( async(e,index)=>{
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:5000/api/games",
-//         apiData[index]
-//       );
-//       console.log(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-// })
-// };
+  //   const handleAdd = async () => {
+  //     apiData.map( async(e,index)=>{
+  //       console.log(e)
+  //     try {
+  //       const response = await axios.post(
+  //         "http://localhost:5000/api/games",
+  //         apiData[index]
+  //       );
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  // })
+  // };
 
   return (
     <>
@@ -70,9 +64,9 @@ const GamesCards = () => {
         {apiData?.map((e) => {
           return (
             <div
-            key={e._id}
-            
-            className="w-72 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              key={e._id}
+              className="w-72 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
               <a href="#">
                 <img
                   className=" rounded-t-lg w-full"
@@ -87,15 +81,19 @@ const GamesCards = () => {
                   </h5>
                 </a>
                 <div className="flex items-center mt-2.5 mb-5">
-                {/* <TotalRating rating={e.rating} />
+                  {/* <TotalRating rating={e.rating} />
                 <Rating cardId={e._id} UserIdA={userId} card={e} rating={e.rating} /> */}
 
-
-       {e?.UsersIdRate?.includes(userId) ?
-   <TotalRating rating={e.rating} />
-   : 
-   <Rating cardId={e._id} UserIdA={userId} card={e} rating={e.rating} />
-       }
+                  {e?.UsersIdRate?.includes(userId) ? (
+                    <TotalRating rating={e.rating} />
+                  ) : (
+                    <Rating
+                      cardId={e._id}
+                      UserIdA={userId}
+                      card={e}
+                      rating={e.rating}
+                    />
+                  )}
 
                   <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
                     {e.rating}
@@ -115,7 +113,6 @@ const GamesCards = () => {
                       play game
                     </a>
                   </Button>
-                  
                 </div>
               </div>
             </div>

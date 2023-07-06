@@ -5,6 +5,8 @@ const SECRETKEY = process.env.SECRETKEY;
 
 module.exports = (req,res,next)=>{
   const token = req.headers.authorization.trim();
+  console.log(token)
+
   if (!token) {
     return res.status(401).json({ message: 'No token provided.' });
   }
@@ -16,6 +18,7 @@ module.exports = (req,res,next)=>{
     }
     console.log("token Authenticated");
     req.user=decoded
+    console.log(decoded)
     next();
     
     // res.json({ message: 'Authenticated', user: decoded });
