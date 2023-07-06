@@ -10,6 +10,7 @@ import TotalRating from "./TotalRating";
 import Icon from "@mdi/react";
 import { mdiHeartOutline, mdiHeart } from "@mdi/js";
 import { fetchUserNew } from '../actions/UserActions';
+import Swal from "sweetalert2";
 
 const GamesCards = () => {
   const dispatch = useDispatch();
@@ -67,8 +68,11 @@ const GamesCards = () => {
     const indexToRemove = UsersIdFavorite.indexOf(userId);
     if (indexToRemove !== -1) {
       UsersIdFavorite.splice(indexToRemove, 1);
+      showSuccessAlert("removed from favorites")
     } else {
       UsersIdFavorite.push(userId);
+      showSuccessAlert("added to favorites")
+
     }
 
     try {
@@ -78,6 +82,14 @@ const GamesCards = () => {
       );
       dispatch(fetchgamesS());
     } catch (error) {}
+  };
+
+  const showSuccessAlert = (message) => {
+    Swal.fire({
+      title: message,
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {});
   };
   return (
     <>
@@ -140,7 +152,7 @@ const GamesCards = () => {
                   )}
 
                   <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
-                    {e.rating}
+                    {Math.floor(e.rating)}
                   </span>
                 </div>
 
