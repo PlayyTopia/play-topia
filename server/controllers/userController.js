@@ -46,6 +46,15 @@ const oneUser =  async (req, res) => {
   const user = await User.find({ _id: id });
   res.json(user);
 };
+const oneUserNew =  async (req, res) => {
+  const id = req.user.id;
+  console.log("id")
+  console.log(id)
+  console.log("id")
+  const user = await User.find({ _id: id });
+  console.log(user)
+  res.json(user);
+};
 
 
 
@@ -90,7 +99,6 @@ const user0=user[0]
 // Protected route
 const protected = async  (req, res) => {
   const token = req.headers.authorization.trim();
-  console.log(token)
   if (!token) {
     return res.status(401).json({ message: 'No token provided.' });
   }
@@ -141,6 +149,7 @@ const newUserContactUs =  async (req, res) => {
 
 };
 module.exports = {
+  oneUserNew,
   allUsers,
   newUser,
   oneUser,
