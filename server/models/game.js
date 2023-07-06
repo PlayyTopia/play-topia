@@ -38,6 +38,10 @@ const gameSchema = new Schema({
     UsersIdRate:{
         type : Array,
         required : false,
+    },
+    UsersIdFavorite:{
+        type : Array,
+        required : false,
     }
 
     },

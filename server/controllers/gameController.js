@@ -43,12 +43,12 @@ const updateGame = async (req, res) => {
 };
 
 const updateGameFav = async (req, res) => {
-    const cardId  = req.params.id;
-    const { UsersIdFavorite } = req.body; 
-    const game = await Game.findByIdAndUpdate(cardId, {UsersIdFavorite});
-    console.log(game)
-    const updatedGame = await game.save();
-    res.json(updatedGame);
+  const cardId = req.params.id;
+  const { UsersIdFavorite } = req.body;
+  console.log(cardId,UsersIdFavorite)
+  const game = await Game.findByIdAndUpdate(cardId, { UsersIdFavorite: UsersIdFavorite }, { new: true });
+  
+  res.json(game);
 };
 
 module.exports = {

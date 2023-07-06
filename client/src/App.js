@@ -17,7 +17,7 @@ import Blog from './componentes/blog/Blog';
 import BlogDetails from './componentes/blog/BlogDetails';
 import Contact from './componentes/Contact';
 import Games from './pages/dashboard/Games';
-
+import  About from './componentes/About'
 
 // ------------------dashboard -------------------------- //
 // import ApproveTable from './componentes/dashboard/ApproveTable'
@@ -98,6 +98,7 @@ const App = () => {
           <Route path="Blog" element={<Blog />} />    
           <Route path="Contact" element={<Contact />} />    
           <Route path="Games" element={<Games />} />    
+          <Route path="About" element={<About />} />    
         </Routes>
         <Footer />
       </Router>
