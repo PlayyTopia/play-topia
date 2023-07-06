@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-
 export const fetchGames = createAsyncThunk("gamesP/fetchGames", async () => {
   const options = {
     method: "GET",
