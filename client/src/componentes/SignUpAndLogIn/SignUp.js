@@ -4,17 +4,17 @@ import axios from 'axios';
 import React, { useContext } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, addUser } from '../../actions/UserActions';
+import { fetchUser, addUser } from '../../actions/AllUsersActions';
 
 export default function SignUp() {
   const dispatch = useDispatch();
-  const { loading, data, error } = useSelector((state) => state.user);
+  // const { loading, data, error } = useSelector((state) => state.user);
   
-console.log(data?.data)
+// console.log(data?.data)
   
-useEffect(() => {
-    dispatch(fetchUser());
-  }, [dispatch]);
+// useEffect(() => {
+//     dispatch(fetchUser());
+//   }, [dispatch]);
   const [userData, setUserData] = useState({ name: '', email: '', phone:"" ,password:"" ,role:0});
 
 
@@ -49,7 +49,8 @@ useEffect(() => {
             try {
               const response =   await dispatch(addUser(userData));        
               localStorage.setItem("auth",(response.payload.token))
-              dispatch(fetchUser());
+              // dispatch(fetchUser());
+              
               window.location.href = "http://localhost:3000/";
               setUserData({ name: '', email: '', phone:"" ,password:"" ,role:0});
             } catch (error) {

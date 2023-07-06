@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { fetchUser, protectedData } from './actions/UserActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { fetchUserNew } from './actions/UserActions';
 
 
 
@@ -15,70 +16,90 @@ import Footer from './componentes/footer';
 import Blog from './componentes/blog/Blog';
 import BlogDetails from './componentes/blog/BlogDetails';
 import Contact from './componentes/Contact';
-
+import Games from './pages/dashboard/Games';
 
 
 // ------------------dashboard -------------------------- //
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
+// import ApproveTable from './componentes/dashboard/ApproveTable'
+// import PendingPosts from './componentes/dashboard/PendingPosts'
+// import UsersInfo from './componentes/dashboard/UserInfo'
+// import MainDashboard from './componentes/dashboard/MainDashboard'
+// import Sidebar from './componentes/dashboard/Sidebar'
+// import ProfileMenu from './componentes/dashboard/NavDashboard'
+import Sidebar from "./pages/dashboard/Sidebar";
+import NavListMenuD from "./pages/dashboard/NavDashboard";
+import MainDashboard from "./pages/dashboard/MainDashboard";
+import EditAboutContact from "./pages/dashboard/EditAboutUs";
+import UserInfo from "./componentes/dashboard/UserInfo"
+import ApproveTable from "./componentes/dashboard/ApproveTable";
+// import AdminInfo from "./components/dashboard/AdminInfo";
+import Chat from "./pages/dashboard/Chat";
+import PendingPosts from "./componentes/dashboard/PendingPosts";
+// import PaymentsInfo from "./components/dashboard/Payment"
 
 const App = () => {
-  
+
   const [hideRouter1, setHideRouterUser] = useState(false);
   const [hideRouter2, setHideRouterAdmin] = useState(true);
-  const [hideRouter3, setHideRouterProvider] = useState(true);
 
 
-    const { loading, data, error } = useSelector((state) => state.user);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
 
-    useEffect(() => {
-        dispatch(fetchUser());
-      }, [dispatch]);
-      
-     useEffect(() => {
-      protectedIdRole()  
-    }, [data]);
-      
-   
-  
-      const protectedIdRole = async ()=> {
-      let ManegeRouters =[];
+  useEffect(() => {
+    if (localStorage.auth != null) {
+      dispatch(fetchUser());
+    }
+  }, [dispatch]);
 
-        let role=data?.role
-        if(role ==1){
-          ManegeRouters= [true ,false,true ]
-        }else if (role ==2){
-          ManegeRouters= [true ,true,false]
-        }else{
-          ManegeRouters= [false ,true,true ]
-        }
-        setHideRouterUser(ManegeRouters[0]);
-        setHideRouterAdmin(ManegeRouters[1]);
-        setHideRouterProvider(ManegeRouters[2]);
+
+  useEffect(() => {
+    if (localStorage.auth != null) {
+      getUserInfo()
+    }
+  }, []);
+
+  const [userData, setUserData] = useState(null)
+  const getUserInfo = async () => {
+    try {
+      const token = localStorage.getItem("auth");
+      const response = await dispatch(fetchUserNew(token));
+      setUserData(response.payload[0])
+      let ManegeRouters = [];
+
+      let role = response.payload[0].role
+      if (role == 1) {
+        ManegeRouters = [true, false, true]
+      } else {
+        ManegeRouters = [false, true, true]
       }
+      setHideRouterUser(ManegeRouters[0]);
+      setHideRouterAdmin(ManegeRouters[1]);
+    } catch (error) {
+      console.error('Failed to add Pokemon:', error);
+    }
+  }
 
 
-// ------------------user -------------------------- //
-   const AppRouter1 = () => {
+
+
+  // ------------------user -------------------------- //
+  const AppRouter1 = () => {
     return (
       <Router>
-        <Navbar /> 
+        <Navbar />
         <Routes>
-          <Route index element={<Home />} />    
-          <Route path="SignUp" element={<SignUp />} />    
-          <Route path="Profile" element={<Profile />} />    
-          <Route path="LogIn" element={<LogIn />} />    
-          <Route path="BlogDetails" element={<BlogDetails />} />    
-          <Route path="Blog" element={<Blog />} />    
-          <Route path="Contact" element={<Contact />} />    
+
+          <Route index element={<Home />} />
+          <Route path="SignUp" element={<SignUp />} />
+          <Route path="Profile" element={<Profile />} />
+          <Route path="LogIn" element={<LogIn />} />
+          <Route path="BlogDetails" element={<BlogDetails />} />
+          <Route path="Blog" element={<Blog />} />
+          <Route path="Contact" element={<Contact />} />
+          <Route path="Games" element={<Games />} />
         </Routes>
-        <Footer/>
+        <Footer />
       </Router>
     );
   };
@@ -90,13 +111,32 @@ const App = () => {
   //-----------------dashboard----------------------------------------//
   const AppRouter2 = () => {
     return (
+      // <Router>
+      //   <Routes>
+      //   <Route path='PendingPosts' element={<PendingPosts/>}/>
+      //   <Route path='UsersInfo' element={<UsersInfo/>}/>
+      //   <Route path='ApproveTable' element={<ApproveTable/>}/>
+      //   <Route index element={<MainDashboard/>}/>
+      //   <Route path='Sidebar' element={<Sidebar/>}/>
+      //   <Route path='ProfileMenu' element={<ProfileMenu/>}/>
+      //   </Routes>
+      // </Router>
       <Router>
-        <Routes>
-          {/* <Route index element={<Home />} />     */}
-          {/* <Route index element={<Home />} />     */}
-          {/* <Route index element={<Home />} />     */}
-          {/* <Route index element={<Home />} />     */}   
-        </Routes>
+        <Sidebar />
+        <div style={{ width: "100%" }}>
+          <NavListMenuD />
+          <Routes>
+            <Route index element={<MainDashboard />} />
+            <Route path="ListUser" element={<UserInfo />} />
+            <Route path="EditAboutContact" element={<EditAboutContact />} />
+            <Route path="Chat" element={<Chat />} />
+            {/* <Route path="UserProfile" element={<UserProfile />} /> */}
+            <Route path="ListRestaurant" element={<ApproveTable />} />
+            {/* <Route path="ListAdmin" element={<AdminInfo />} /> */}
+            <Route path="AcceptTables" element={<PendingPosts />} />
+            {/* <Route path="PaymentsInfo" element={<PaymentsInfo />} /> */}
+          </Routes>
+        </div>
       </Router>
     );
   };
@@ -110,21 +150,11 @@ const App = () => {
 
 
 
-  const AppRouter3 = () => {
-    return (
-      <Router>
-        {/* <NavListMenu /> */}
-        {/* <Routes>
-          <Route path="ContactUs" element={<Contact />} />
-          <Route path="About" element={<About />} />
-        </Routes> */}
-      </Router>
-    );
-  };
+
 
   return (
 
- 
+
     <>
       {hideRouter1 ? null : (
         <>
@@ -140,15 +170,10 @@ const App = () => {
         </>
       )}
 
-      {hideRouter3 ? null : (
-        <>
-          <AppRouter3 />
-        </>
-      )}
- 
+
     </>
 
-      
+
   );
 };
 

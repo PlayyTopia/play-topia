@@ -4,7 +4,9 @@ const userController = require("../controllers/userController");
 const protected =require("../middleware/Protected")
 const upload = require("../middleware/handleImage")
 
+
 router.get("/api/users" ,protected, userController.allUsers);
+router.get("/api/userNew" ,protected, userController.oneUserNew);
 router.get("/api/Providers", userController.allProviders);
 router.get("/api/Admins", userController.allAdmins);
 router.post("/api/users", userController.newUser);

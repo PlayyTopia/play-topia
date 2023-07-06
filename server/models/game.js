@@ -39,6 +39,7 @@ const gameSchema = new Schema({
         type : Array,
         required : false,
     }
+
     },
      {timestamps : true}
     )

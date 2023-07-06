@@ -7,34 +7,37 @@ import { Button } from "@material-tailwind/react";
 import axios from "axios";
 import Rating from "./Rating";
 import TotalRating from "./TotalRating";
+import Icon from "@mdi/react";
+import { mdiHeartOutline, mdiHeart } from "@mdi/js";
+import { fetchUserNew } from '../actions/UserActions';
 
 const GamesCards = () => {
+  const dispatch = useDispatch();
 
   const [userId, setUserId] = useState(null);
+  const [userData ,setUserData]= useState(null)
 
-
-  const {
-    loading: userLoading,
-    data: userData,
-    error: userError,
-  } = useSelector((state) => state.user);
-
-
-
-  useEffect(() => {
-    setUserId(userData?.id);
-  }, [userData,fetchgamesS]);
-
+  const getUserInfo = async ()=>{
+    try {
+        const token = localStorage.getItem("auth");
+        const response = await dispatch(fetchUserNew(token)); 
+        setUserData(response.payload[0])
+        setUserId(response.payload[0]._id)       
+      } catch (error) {
+        console.error('Failed to add Pokemon:', error);
+      }
+}
+      useEffect(() => {
+        getUserInfo()
+      }, []);
 
   const [apiData, setApiData] = useState(null);
-  const dispatch = useDispatch();
 
   const {
     loading: gamesLoading,
     data: gamesData,
     error: gamesError,
   } = useSelector((state) => state.games);
-
 
   useEffect(() => {
     dispatch(fetchgamesS());
@@ -44,21 +47,38 @@ const GamesCards = () => {
     setApiData(gamesData);
   }, [gamesData]);
 
+  //   const handleAdd = async () => {
+  //     apiData.map( async(e,index)=>{
+  //       console.log(e)
+  //     try {
+  //       const response = await axios.post(
+  //         "http://localhost:5000/api/games",
+  //         apiData[index]
+  //       );
+  //       console.log(response.data);
+  //     } catch (error) {
+  //       console.error(error);
+  //     }
+  // })
+  // };
+  const handleFAv = async (card) => {
+    let UsersIdFavorite = [...(card.UsersIdFavorite || [])];
 
-//   const handleAdd = async () => {
-//     apiData.map( async(e,index)=>{
-//     try {
-//       const response = await axios.post(
-//         "http://localhost:5000/api/games",
-//         apiData[index]
-//       );
-//       console.log(response.data);
-//     } catch (error) {
-//       console.error(error);
-//     }
-// })
-// };
+    const indexToRemove = UsersIdFavorite.indexOf(userId);
+    if (indexToRemove !== -1) {
+      UsersIdFavorite.splice(indexToRemove, 1);
+    } else {
+      UsersIdFavorite.push(userId);
+    }
 
+    try {
+      const response = await axios.put(
+        `http://localhost:5000/api/updateGameFav/${card._id}`,
+        { UsersIdFavorite }
+      );
+      dispatch(fetchgamesS());
+    } catch (error) {}
+  };
   return (
     <>
       {/* <Button
@@ -70,9 +90,27 @@ const GamesCards = () => {
         {apiData?.map((e) => {
           return (
             <div
-            key={e._id}
-            
-            className="w-72 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+              key={e._id}
+              className="relative w-72 max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"
+            >
+              {e.UsersIdFavorite.indexOf(userId) === -1 ? (
+                <Icon
+                  onClick={() => handleFAv(e)}
+                  className="absolute right-2 top-2 "
+                  color="red"
+                  path={mdiHeartOutline}
+                  size={1.5}
+                />
+              ) : (
+                <Icon
+                  onClick={() => handleFAv(e)}
+                  className="absolute right-2 top-2 "
+                  color="red"
+                  path={mdiHeart}
+                  size={1.5}
+                />
+              )}
+
               <a href="#">
                 <img
                   className=" rounded-t-lg w-full"
@@ -87,15 +125,19 @@ const GamesCards = () => {
                   </h5>
                 </a>
                 <div className="flex items-center mt-2.5 mb-5">
-                {/* <TotalRating rating={e.rating} />
+                  {/* <TotalRating rating={e.rating} />
                 <Rating cardId={e._id} UserIdA={userId} card={e} rating={e.rating} /> */}
 
-
-       {e?.UsersIdRate?.includes(userId) ?
-   <TotalRating rating={e.rating} />
-   : 
-   <Rating cardId={e._id} UserIdA={userId} card={e} rating={e.rating} />
-       }
+                  {e?.UsersIdRate?.includes(userId) ? (
+                    <TotalRating rating={e.rating} />
+                  ) : (
+                    <Rating
+                      cardId={e._id}
+                      UserIdA={userId}
+                      card={e}
+                      rating={e.rating}
+                    />
+                  )}
 
                   <span className="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded dark:bg-blue-200 dark:text-blue-800 ml-3">
                     {e.rating}
@@ -115,7 +157,6 @@ const GamesCards = () => {
                       play game
                     </a>
                   </Button>
-                  
                 </div>
               </div>
             </div>

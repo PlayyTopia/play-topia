@@ -1,17 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUser, addUser } from "../actions/UserActions";
+import { fetchUser, addUser } from "../actions/AllUsersActions";
 import { useEffect } from "react";
 import { Button } from "@material-tailwind/react";
 import GamesCards from "./GamesCards";
+import { fetchUserNew } from '../actions/UserActions';
+import { fetchgamesS } from '../actions/ApiActions';
+
 const Profile = () => {
+
+  const { loading, data, error } = useSelector((state) => state.games);
+
+
+
+
   const [userId, setUserId] = useState(null);
-  
-  // const dispatch = useDispatch();
-  // useEffect(() => {
-  //   dispatch(fetchUser());
-  //   setUserId(userData?.id)
-  // }, [dispatch]);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchgamesS());
+  }, []);
+  console.log(data)
 
   const {
     loading: userLoading,
@@ -25,12 +34,11 @@ const Profile = () => {
     setUserId(userData?.id);
   }, [userData]);
 
-  console.log(userId);
 
 
   return (
     <>
-   <GamesCards/>  
+   {/* <GamesCards/>   */}
     </>
   );
 };

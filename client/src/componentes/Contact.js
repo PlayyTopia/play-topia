@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchUserNew } from '../actions/UserActions';
 
 const Contact = () => {
+    const dispatch = useDispatch();
+    const [userData, setUserData] = useState(null)
+    const getUserInfo = async () => {
+        try {
+            const token = localStorage.getItem("auth");
+            const response = await dispatch(fetchUserNew(token));
+            setUserData(response.payload[0])
+        } catch (error) {
+            console.error('Failed to add Pokemon:', error);
+        }
+    }
+    useEffect(() => {
+        getUserInfo()
+    }, []);
+
+console.log(userData)
+
     return (
         <div>
             {/* <Navbar /> */}

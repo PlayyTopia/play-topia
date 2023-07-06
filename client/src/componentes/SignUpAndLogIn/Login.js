@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchUser, usersLogin } from '../../actions/UserActions';
+import { fetchUser, usersLogin } from '../../actions/AllUsersActions';
 
 
 export default function LogIn() {
