@@ -19,12 +19,12 @@ import Contact from './componentes/Contact';
 
 
 // ------------------dashboard -------------------------- //
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
-// import Profile from './componentes/Profile';
+import ApproveTable from './componentes/dashboard/ApproveTable'
+import PendingPosts from './componentes/dashboard/PendingPosts'
+import UsersInfo from './componentes/dashboard/UserInfo'
+import MainDashboard from './componentes/dashboard/MainDashboard'
+import Sidebar from './componentes/dashboard/Sidebar'
+import ProfileMenu from './componentes/dashboard/NavDashboard'
 
 const App = () => {
   
@@ -92,10 +92,12 @@ const App = () => {
     return (
       <Router>
         <Routes>
-          {/* <Route index element={<Home />} />     */}
-          {/* <Route index element={<Home />} />     */}
-          {/* <Route index element={<Home />} />     */}
-          {/* <Route index element={<Home />} />     */}   
+        <Route path='PendingPosts' element={<PendingPosts/>}/>
+        <Route path='UsersInfo' element={<UsersInfo/>}/>
+        <Route path='ApproveTable' element={<ApproveTable/>}/>
+        <Route path='MainDashboard' element={<MainDashboard/>}/>
+        <Route path='Sidebar' element={<Sidebar/>}/>
+        <Route path='ProfileMenu' element={<ProfileMenu/>}/>
         </Routes>
       </Router>
     );
