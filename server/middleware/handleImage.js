@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     cb(
       null,
       file.fieldname + "_" + Date.now() + path.extname(file.originalname)
-    ); // Generate a unique filename
+    );
   },
 });
 
