@@ -48,7 +48,7 @@ const App = () => {
 
   useEffect(() => {
     if (localStorage.auth != null) {
-      dispatch(fetchUser());
+      dispatch(fetchUserNew());
     }
   }, [dispatch]);
 
@@ -98,8 +98,6 @@ const App = () => {
           <Route path="Blog" element={<Blog />} />    
           <Route path="Contact" element={<Contact />} />    
           <Route path="Games" element={<Games />} />    
- element={<Contact />} />
-
         </Routes>
         <Footer />
       </Router>

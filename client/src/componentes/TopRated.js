@@ -9,6 +9,8 @@ import Rating from "./Rating";
 import TotalRating from "./TotalRating";
 import { Button } from "@material-tailwind/react";
 import axios from "axios";
+import Swal from "sweetalert2";
+
 const TopRated = () => {
 
   const [userId, setUserId] = useState(null);
@@ -62,9 +64,7 @@ const customSort = (a, b) => {
   return 0;
 };
 
-// console.log(apiData)
-// UsersIdRate.length  >>>>
-// rating  = total/length           >>>>
+
 const handleFAv = async (card) => {
   console.log(card)
   let UsersIdFavorite = [...(card.UsersIdFavorite || [])];
@@ -72,8 +72,12 @@ const handleFAv = async (card) => {
   const indexToRemove = UsersIdFavorite.indexOf(userId);
   if (indexToRemove !== -1) {
     UsersIdFavorite.splice(indexToRemove, 1);
+    showSuccessAlert("removed from favorites")
+
   } else {
     UsersIdFavorite.push(userId);
+    showSuccessAlert("added to favorites")
+
   }
 
   try {
@@ -86,6 +90,14 @@ const handleFAv = async (card) => {
   } catch (error) {
   console.log(error);
   }
+};
+
+const showSuccessAlert = (message) => {
+  Swal.fire({
+    title: message,
+    icon: "success",
+    confirmButtonText: "OK",
+  }).then(() => {});
 };
 return (
     <>
