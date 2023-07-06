@@ -24,6 +24,7 @@ const [userId, setUserId]=useState(null)
       dispatch(fetchUserNew(token))
       fetchDataFav(data[0]?._id)
       setUserId(data[0]?._id)
+      console.log(data[0]?._id)
   }, [dispatch]);
 
 
