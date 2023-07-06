@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import useBlog from "./PostFunction";
+// import useBlog from "./PostFunction";
 import { fetchUserNew } from "../../actions/UserActions";
-
+import axios from 'axios'
 function PostForm() {
-  const { handleSubmit } = useBlog();
   const dispatch = useDispatch();
-  const [image, setImg] = useState("");
+  // const [image, setImg] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
   const [userData, setUserData] = useState("");
@@ -28,8 +27,30 @@ function PostForm() {
     getUserInfo();
   }, []);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    console.log({ title, content, userData });
+    const formData = new FormData();
+    // formData.append("user_id", userData._id);
+    // formData.append("user_name", userData.name);
+    // formData.append("title", title);
+    // formData.append("desc", content);
+    // formData.append("image", image);
+    console.log(formData);
+    axios
+      .post("http://localhost:5000/addPost", { title, desc: content, user_id: userData._id, user_name: userData.name })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((error) => {
+        console.log(error, "mais error");
+      });
+  };
+
+
   return (
-    <form onSubmit={(e) => handleSubmit({ image, title, content, userData ,e})}>
+    <form onSubmit={(e) => { handleSubmit(e) }}>
       <div className="heading text-center font-bold text-2xl m-5 text-white">
         New Post
       </div>
@@ -45,7 +66,7 @@ function PostForm() {
           placeholder="Table Image"
           name="guest_num"
           onChange={(e) => {
-            setImg(e.target.files[0]);
+            // setImg(e.target.files[0]);
           }}
           accept="image/*"
         />
@@ -65,10 +86,9 @@ function PostForm() {
           value={content}
           onChange={onContentChanged}
         />
-        <div className="count ml-auto text-gray-400 flex text-gray-500 m-2 text-xs font-semibold">
+        <div className="count ml-auto text-gray-400 flex m-2 text-xs font-semibold">
           0/300
         </div>
-        {/* buttons */}
         <div className="buttons flex">
           <button
             type="submit"

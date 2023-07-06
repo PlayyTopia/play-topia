@@ -48,7 +48,7 @@ const App = () => {
 
   useEffect(() => {
     if (localStorage.auth != null) {
-      dispatch(fetchUser());
+      dispatch(fetchUserNew());
     }
   }, [dispatch]);
 
