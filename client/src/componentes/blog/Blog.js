@@ -57,7 +57,9 @@ const Blog = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-wrap text-white -mx-4">
+          <div 
+          style={{height:"600px"}}
+          className="flex flex-wrap text-white mx-6 p-3 overflow-y-scroll border-2 border-white">
             <BlogCard/>
           </div>
         </div>

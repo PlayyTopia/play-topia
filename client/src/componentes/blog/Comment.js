@@ -2,6 +2,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import ReportList from "./ReportList";
 
 const Comment = () => {
   const { id } = useParams();
@@ -31,7 +32,7 @@ const Comment = () => {
         user_name,
       })
       .then((res) => {
-        console.log(res);
+        setCommentDetails(" ");
         setRefresh(!Refresh);
       })
       .catch((error) => {
@@ -51,6 +52,7 @@ const Comment = () => {
               placeholder="Type Your Comment"
               required=""
               defaultValue={""}
+              value={comment_details}
               onChange={(e) => setCommentDetails(e.target.value)}
             />
           </div>
@@ -64,24 +66,42 @@ const Comment = () => {
             </button>
           </div>
         </form>
-        <div className="flex flex-col ">
-          {postComment?.map((ele) => {
-            return (
-              <div className="border rounded-md bg-white p-3 ml-3 my-3">
-                <div className="flex gap-3 items-center">
-                  <img
-                    src="https://avatars.githubusercontent.com/u/22263436?v=4"
-                    className="object-cover w-8 h-8 rounded-full 
+        {postComment.length !== 0 && (
+          <div className="flex flex-col h-96 overflow-y-scroll">
+            {postComment
+              ?.sort((a, b) => new Date(b.date) - new Date(a.date))
+              .map((ele) => {
+                const date = new Date(ele.date);
+                return (
+                  <div className="border rounded-md bg-white p-3 ml-3 my-3 flex flex-row-reverse justify-between">
+                    <ReportList oneComment={ele}/>
+                    <div>
+                      <div className="flex gap-3 items-center">
+                        <img
+                          src="https://avatars.githubusercontent.com/u/22263436?v=4"
+                          className="object-cover w-8 h-8 rounded-full 
                             border-2 border-emerald-400  shadow-emerald-400
                             "
-                  />
-                  <h3 className="font-bold">{ele.user_name}</h3>
-                </div>
-                <p className="text-gray-600 mt-2">{ele.comment_details}</p>
-              </div>
-            );
-          })}
-        </div>
+                        />
+                        <h3 className="font-bold">
+                          {ele.user_name}{" "}
+                          {date && (
+                            <span>
+                              {date.toLocaleDateString()}{" "}
+                              {date.toLocaleTimeString()}
+                            </span>
+                          )}
+                        </h3>
+                      </div>
+                      <p className="text-gray-600 mt-2">
+                        {ele.comment_details}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+          </div>
+        )}
       </div>
     </div>
   );
