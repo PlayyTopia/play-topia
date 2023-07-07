@@ -155,7 +155,7 @@ export default function NavbarA() {
                 onClick={() => {
                   closeMenu(label);
                 }}
-                className={`flex items-center gap-2 rounded ${
+                className={`flex items-center gap-2 rounded  ${
                   isLastItem
                     ? "hover:bg-red-500/10 focus:bg-red-500/10 active:bg-red-500/10"
                     : ""
@@ -185,7 +185,7 @@ export default function NavbarA() {
  
   return (
     <Navbar className="py-2 lg:py-4 bg-[#10143d]
-      sticky top-0 z-5">
+       ">
       <div className="container mx-auto flex items-center justify-between text-blue-gray-900">
       <Link to="/"> <Typography
           as="a"

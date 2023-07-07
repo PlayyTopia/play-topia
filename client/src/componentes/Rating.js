@@ -24,7 +24,7 @@ const Rating = ({ cardId, card, UserIdA, rating }) => {
 
   const showSuccessAlert = (message) => {
     Swal.fire({
-      title: `Thank you for rate `,
+      title: message,
       icon: "success",
       confirmButtonText: "OK",
     }).then(() => {});
@@ -55,7 +55,7 @@ const Rating = ({ cardId, card, UserIdA, rating }) => {
       };
       const response = await dispatch(updategames(updatedCard));
       dispatch(fetchgamesS());
-      showSuccessAlert(newrate);
+      showSuccessAlert("Thank you for rate ");
 
       // console.log(response.payload);
     } catch (error) {

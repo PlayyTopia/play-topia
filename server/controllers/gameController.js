@@ -12,16 +12,17 @@ const allGames = (req, res) => {
       });
   };
 
-  // const favoriteGames = (req, res) => {
-  //   const userId = req.params.id;
-  //   Game.find({ UsersIdFavorite: { $in: [userId] } })
-  //     .then((data) => {
-  //       res.json(data);
-  //     })
-  //     .catch((error) => {
-  //       errorHandler(error, req, res);
-  //     });
-  // };
+  const favoriteGames = (req, res) => {
+    const userId = req.params.id;
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+    Game.find({ UsersIdFavorite: { $in: [userId] } })
+      .then((data) => {
+        res.json(data);
+      })
+      .catch((error) => {
+        errorHandler(error, req, res);
+      });
+  };
 
   const newGame =  async (req, res) => {
     const { title, thumbnail , short_description ,game_url,freetogame_profile_url } = req.body;
@@ -42,20 +43,19 @@ const updateGame = async (req, res) => {
 };
 
 const updateGameFav = async (req, res) => {
-    const cardId  = req.params.id;
-    const { UsersIdFavorite } = req.body; 
-    console.log(UsersIdFavorite,cardId)
-    const game = await Game.findByIdAndUpdate(cardId, {UsersIdFavorite});
-    console.log(game)
-    const updatedGame = await game.save();
-    console.log(updatedGame)
-    res.json(updatedGame);
+  const cardId = req.params.id;
+  const { UsersIdFavorite } = req.body;
+  console.log(cardId,UsersIdFavorite)
+  const game = await Game.findByIdAndUpdate(cardId, { UsersIdFavorite: UsersIdFavorite }, { new: true });
+  
+  res.json(game);
 };
 
 module.exports = {
     allGames,
     newGame,
     updateGame,
-    updateGameFav
+    updateGameFav,
+    favoriteGames,
   }; 
   
