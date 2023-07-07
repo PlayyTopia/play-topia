@@ -28,7 +28,8 @@ const getComment = async (req, res) => {
   try {
     const postId = req.params.id;
 
-    const post = await Post.findById(postId);
+    const post = await Post.findById(postId).populate('comments.user_id');
+
 
     if (!post) {
       return res.status(404).json({ error: "Post not found." });
