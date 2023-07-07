@@ -1,8 +1,8 @@
-import { Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import React from "react";
 import { fetchgamesS } from "../actions/ApiActions";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 
 function GamesSection() {
   const [slicedArray, setSlicedArray] = useState([]);
@@ -29,63 +29,44 @@ function GamesSection() {
     }
   }, [gamesData]);
 
-  console.log(slicedArray)
+  console.log(slicedArray);
 
-  let randomNumber = Math.floor(Math.random() * 5 )
-  console.log(randomNumber)
-
-
-
-
+  let randomNumber = Math.floor(Math.random() * 5);
+  console.log(randomNumber);
 
   return (
     <>
-  {/* component */}
-  <section className="flex justify-center mt-10 gap-10 flex-wrap p-20">
- 
- {slicedArray?.map((game)=>{
+      {/* component */}
+      <section className="flex justify-center mt-10 gap-10 flex-wrap p-20">
+        {slicedArray?.map((game) => {
+          return (
+            <a target="_blank" href={game.game_url}>
+              <div
+                key={game._id}
+                className="hover:scale-110 h-44 w-32 bg-gray-100 rounded-xl flex flex-col justify-center items-center shadow shadow-md shadow-fuchsia-400 duration-300 border border-fuchsia-500  "
+              >
+                <img className="hover:scale-125 rounded-full w-20 h-20" src={game.thumbnail} />
 
-return(
-
-<a 
-target='_blank'
-href={game.game_url}
->
-<div 
-key={game._id}
-className="h-44 w-32 bg-gray-100 rounded-xl flex flex-col justify-center items-center shadow shadow-md shadow-fuchsia-400 duration-300 border border-fuchsia-500  ">
-    
-  <img className='rounded-full w-20 h-20' src={game.thumbnail}/>
-    
-    <span className="mt-6 text-sm ?leading-5 font-semibold text-center">
-     {game.title}
-    </span>
-  </div>
-  </a>
-
-
-
-
-)
-
-
-
- })}
-  
-
-
-  
-
- 
-
- 
-  </section>
-  <div className="flex justify-center">
-			<Link to="/games"><button type="button" className="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-900 text-white">Check all the Games...</button></Link>
-		</div>
-</>
-
-  )
+                <span className="mt-6 text-sm ?leading-5 font-semibold text-center">
+                  {game.title}
+                </span>
+              </div>
+            </a>
+          );
+        })}
+      </section>
+      <div className="flex justify-center">
+        <Link to="/games">
+          <button
+            type="button"
+            className="px-6 py-3 text-sm rounded-md hover:underline dark:bg-gray-900 text-white"
+          >
+            Check all the Games...
+          </button>
+        </Link>
+      </div>
+    </>
+  );
 }
 
-export default GamesSection
+export default GamesSection;

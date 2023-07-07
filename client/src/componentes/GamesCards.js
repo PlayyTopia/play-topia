@@ -33,6 +33,7 @@ const GamesCards = () => {
       }, []);
 
   const [apiData, setApiData] = useState(null);
+  const [filterdApiData, setFilterdApiData] = useState(null);
 
   const {
     loading: gamesLoading,
@@ -46,6 +47,7 @@ const GamesCards = () => {
 
   useEffect(() => {
     setApiData(gamesData);
+    setFilterdApiData(gamesData);
   }, [gamesData]);
 
   //   const handleAdd = async () => {
@@ -91,6 +93,43 @@ const GamesCards = () => {
       confirmButtonText: "OK",
     }).then(() => {});
   };
+
+
+
+  const [yourSelectedStateValueType, setOptionType] = useState("");
+  //-----------------------search------------------------//
+  const [searchTermUsers, setSearchTermUsers] = useState("");
+
+
+  const handleFilterChange = (typeValue) => {
+    let sortedDataUsers = [];
+  console.log(apiData)
+    if (typeValue === "H") {
+      sortedDataUsers = [...apiData].sort((a, b) => {
+        return parseFloat(b.rating) - parseFloat(a.rating);
+      });
+    } else if (typeValue === "L") {
+      sortedDataUsers = [...apiData].sort((a, b) => {
+        return parseFloat(a.rating) - parseFloat(b.rating);
+      });
+    }else{
+      sortedDataUsers= apiData
+    }
+  
+    setFilterdApiData(sortedDataUsers);
+  };
+
+
+const filterDataByNameGames = (searchTermGames) => {
+  const filteredDataGames = apiData.filter((item) =>
+    item.title.toLowerCase().includes(searchTermGames.toLowerCase())
+  );
+  setFilterdApiData(filteredDataGames);
+  // setCurrentPageMeals(1);
+};
+
+
+
   return (
     <>
       {/* <Button
@@ -98,8 +137,48 @@ const GamesCards = () => {
         variant="text"
         onClick={handleAdd}
       ></Button> */}
+
+<form>
+  <div className="flex m-6">
+               <select
+                className="px-4 py-3 w-48 md:w-60 rounded-md bg-gray-100 border-[#E8AA42] border-2 focus:border-yellow-600 focus:bg-white focus:ring-0 text-sm appearance mr-5"
+                value={yourSelectedStateValueType}
+                onChange={(e) => {
+                  setOptionType(e.target.value);
+                  handleFilterChange(e.target.value);
+                }}
+              >
+                <option value=""> All Games</option>
+                <option value="H">H-rated</option>
+                <option value="L">L-rated</option>
+              </select>
+    
+
+    <div className="relative w-full">
+      <input
+        type="search"
+        id="search-dropdown"
+        className="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+        placeholder="Search Mockups, Logos, Design Templates..."
+        required=""
+        value={searchTermUsers}
+        onChange={(e) => {
+          setSearchTermUsers(e.target.value);
+          filterDataByNameGames(e.target.value);
+        }}
+      />
+    </div>
+  </div>
+</form>
+
+
+
+
+
+
+
       <div className="grid  lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 gap-4 place-items-center p-5">
-        {apiData?.map((e) => {
+        {filterdApiData?.map((e) => {
           return (
             <div
               key={e._id}
@@ -108,7 +187,8 @@ const GamesCards = () => {
               {e.UsersIdFavorite.indexOf(userId) === -1 ? (
                 <Icon
                   onClick={() => handleFAv(e)}
-                  className="absolute right-2 top-2 "
+                  className="absolute right-2 top-2 hover:scale-110 "
+                  title="click to add"
                   color="red"
                   path={mdiHeartOutline}
                   size={1.5}
@@ -116,7 +196,8 @@ const GamesCards = () => {
               ) : (
                 <Icon
                   onClick={() => handleFAv(e)}
-                  className="absolute right-2 top-2 "
+                  className="absolute right-2 top-2  hover:scale-110"
+                  title="click to remove"
                   color="red"
                   path={mdiHeart}
                   size={1.5}
