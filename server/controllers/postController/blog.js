@@ -19,6 +19,52 @@ const addPost = async (req, res) => {
     }
 };
 
+const getPost = (req, res) => {
+  Post.find({ approve: false ,delete:false} )
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((error) => {
+      errorHandler(error, req, res);
+    });
+};
+/////////delete
+const deletePost= async (req, res) => {
+  
+  const user_id = req.params.id;
+
+  try {
+    const result = await Post.findByIdAndUpdate(user_id, { $set: { delete: true } });
+    
+    if (!result) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    res.json({ message: 'Post delete status updated' });
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
+};
+////approve
+const approvePost= async (req, res) => {
+  
+  const user_id = req.params.id;
+
+  try {
+    const result = await Post.findByIdAndUpdate(user_id, { $set: { approve: true } });
+    
+    if (!result) {
+      return res.status(404).json({ message: 'Post not found' });
+    }
+
+    res.json({ message: 'Post delete status updated' });
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
+};
 module.exports = {
-    addPost,
+  addPost,
+  getPost,
+  deletePost,
+  approvePost
 };
