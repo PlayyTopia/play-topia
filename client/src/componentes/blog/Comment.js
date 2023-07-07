@@ -77,7 +77,7 @@ const Comment = () => {
                     <div>
                       <div className="flex gap-3 items-center">
                         <img
-                          src="https://avatars.githubusercontent.com/u/22263436?v=4"
+                          src={`http://localhost:5000/${ele.user_id.img}`}
                           className="object-cover w-8 h-8 rounded-full 
                             border-2 border-emerald-400  shadow-emerald-400
                             "
