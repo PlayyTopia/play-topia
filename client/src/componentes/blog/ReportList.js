@@ -1,8 +1,78 @@
+import axios from "axios";
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
+import Swal from "sweetalert2";
 
-function ReportList({ oneComment }) {
+function ReportList({ oneComment, setRefresh, Refresh }) {
   const user_id = useSelector((state) => state.userNew.data[0]?._id);
+  const { id } = useParams();
+
+  const handleDelete = () => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "do you want to delete your comment?!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("Deleted!", "Your comment has been deleted.", "success");
+        axios
+          .put(`http://localhost:5000/deleteComment/${id}/${oneComment._id}`)
+          .then((res) => {
+            console.log(res);
+            setRefresh(!Refresh);
+          })
+          .catch((error) => {
+            console.log(error, "in deletcomment data reportList page");
+          });
+      }
+    });
+  };
+
+  const handleAddReport = (reportDetails) => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: false,
+    });
+
+    swalWithBootstrapButtons
+      .fire({
+        title: "Are you sure?",
+        text: "Are you sure you want to send this report ?",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "Your report has been sent to the admin, we will check it ASAP",
+            "success"
+          );
+          axios
+            .put(`http://localhost:5000/addReport/${oneComment._id}`, {
+              user_id,
+              reportDetails,
+            })
+            .then((res) => {
+              console.log(res);
+            })
+            .catch((error) => {
+              console.log(error, "in add Post data reportList page");
+            });
+        }
+      });
+  };
+
   return (
     <>
       {/* component */}
@@ -13,8 +83,15 @@ function ReportList({ oneComment }) {
         <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
           {oneComment.user_id === user_id && (
             <>
-              <li className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer">Edit</li>
-              <li className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer">Delete</li>
+              <li className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer">
+                Edit
+              </li>
+              <li
+                className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer"
+                onClick={() => handleDelete()}
+              >
+                Delete
+              </li>
             </>
           )}
 
@@ -31,10 +108,27 @@ function ReportList({ oneComment }) {
                 </svg>
               </span>
             </button>
-            <ul className="bg-white border rounded-sm absolute top-0 right-0 transition duration-150 ease-in-out origin-top-left min-w-32">
-              <li className="px-3 py-1 hover:bg-gray-100 cursor-pointer">Javascript</li>
-              <li className="px-3 py-1 hover:bg-gray-100 cursor-pointer">Go</li>
-              <li className="px-3 py-1 hover:bg-gray-100 cursor-pointer">Rust</li>
+            <ul className="bg-white border rounded-sm absolute top-6 right-full mt-2 ml-2 transition duration-150 ease-in-out origin-top-left w-64">
+              <li
+                className="px-3 py-1 hover:bg-gray-100 cursor-pointer"
+                onClick={() => handleAddReport("Harmful content")}
+              >
+                Harmful content
+              </li>
+              <li
+                className="px-3 py-1 hover:bg-gray-100 cursor-pointer"
+                onClick={() =>
+                  handleAddReport("Contrary to the content of the post.")
+                }
+              >
+                Contrary to the content of the post.
+              </li>
+              <li
+                className="px-3 py-1 hover:bg-gray-100 cursor-pointer"
+                onClick={() => handleAddReport("Unwanted advertisements.")}
+              >
+                Unwanted advertisements.
+              </li>
             </ul>
           </li>
         </ul>

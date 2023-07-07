@@ -45,7 +45,51 @@ const getComment = async (req, res) => {
   }
 };
 
+const deleteComment = async (req, res) => {
+  const { commentid, postid } = req.params;
+  console.log(postid, commentid);
+  try {
+    const oneComment = await Post.updateOne(
+      { _id: postid, "comments._id": commentid },
+      { $set: { "comments.$.delete": true } }
+    );
+
+    // console.log(oneComment);
+    res.status(200).json(oneComment);
+  } catch (error) {
+    res.status(500, error.message);
+  }
+};
+
+const addReport = async (req, res) => {
+  try {
+    const { commentId } = req.params;
+    const { user_id, reportDetails } = req.body;
+    const newReport = {
+      user_id: user_id,
+      reportDetails: reportDetails,
+    };
+    Post.updateOne(
+      { "comments._id": commentId },
+      { $push: { "comments.$.reports": newReport } }
+    )
+      .then((result) => {
+        if (result.nModified === 0) {
+          return res.status(404).json({ message: "Comment not found" });
+        }
+        res.json({ message: "Report added to comment" });
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  } catch (error) {
+    res.status(500, error.message);
+  }
+};
+
 module.exports = {
   addComment,
   getComment,
+  deleteComment,
+  addReport,
 };

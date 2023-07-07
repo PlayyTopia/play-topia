@@ -16,7 +16,6 @@ const Comment = () => {
     axios
       .get(`http://localhost:5000/getComment/${id}`)
       .then((res) => {
-        console.log(res);
         setPostComment(res.data);
       })
       .catch((error) => {
@@ -74,7 +73,7 @@ const Comment = () => {
                 const date = new Date(ele.date);
                 return (
                   <div className="border rounded-md bg-white p-3 ml-3 my-3 flex flex-row-reverse justify-between">
-                    <ReportList oneComment={ele}/>
+                    <ReportList oneComment={ele} setRefresh={setRefresh} Refresh={Refresh} />
                     <div>
                       <div className="flex gap-3 items-center">
                         <img
