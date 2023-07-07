@@ -16,7 +16,7 @@ import Footer from './componentes/footer';
 import Blog from './componentes/blog/Blog';
 import BlogDetails from './componentes/blog/BlogDetails';
 import Contact from './componentes/Contact';
-import Games from './pages/dashboard/Games';
+import Games from './pages/Games';
 import  About from './componentes/About'
 
 // ------------------dashboard -------------------------- //
@@ -46,18 +46,18 @@ const App = () => {
     const dispatch = useDispatch();
 
 
-  useEffect(() => {
-    if (localStorage.auth != null) {
-      dispatch(fetchUserNew());
-    }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   if (localStorage.auth != null) {
+  //     dispatch(fetchUserNew());
+  //   }
+  // }, [dispatch]);
 
 
      useEffect(() => {
       if(localStorage.auth != null){ 
       getUserInfo()
     }
-    }, []);
+    }, [dispatch]);
       
     const [userData ,setUserData]= useState(null)
    const getUserInfo = async ()=>{
@@ -97,6 +97,7 @@ const App = () => {
           <Route path="Blog" element={<Blog />} />
           <Route path="Contact" element={<Contact />} />
           <Route path="Games" element={<Games />} />
+          <Route path="About" element={<About />} />
         </Routes>
         <Footer />
       </Router>
