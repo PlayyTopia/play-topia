@@ -12,6 +12,23 @@ const getPost = async (req, res) => {
   }
 };
 
+const getMostCommentPost = async (req, res) => {
+  try {
+    const allPost = await Post.find({
+      approve: true,
+      delete: false,
+    });
+    const filteredPosts = allPost.sort((a, b) => {
+      const commentsCountA = a.comments.length;
+      const commentsCountB = b.comments.length;
+      return commentsCountB - commentsCountA;
+    });
+    res.status(200).json(filteredPosts);
+  } catch (error) {
+    res.status(500, error.message);
+  }
+};
+
 const getOnePost = async (req, res) => {
   const { id } = req.params;
   try {
@@ -38,4 +55,5 @@ module.exports = {
   getPost,
   getOnePost,
   deleteOnePost,
+  getMostCommentPost,
 };
