@@ -104,7 +104,7 @@ function handleLogOut(){
           </ListItem>
           </Link>
 
-          <Link to='/ListRestaurant'>
+          <Link to='/Comment'>
           <ListItem className="hover:bg-[#babccf] hover:text-white">
             <ListItemPrefix>
             <Icon path={mdiHandshakeOutline } size={1} />

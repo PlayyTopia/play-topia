@@ -1,4 +1,4 @@
-///////////////router
+///////////////dashbord
 const express = require("express");
 const router = express.Router();
 // const handleImage = require("../../middleware/handleImage");
@@ -15,5 +15,8 @@ router.put("/deletePost/:id", blog.deletePost);
 ///approve
 router.put("/approvePost/:id", blog.approvePost);
 
-
+///get comment
+router.get("/allComments", blog.getAllComments);
+///delete comment
+router.put("/deletecomment/:id/:postId", blog.deleteComment);
 module.exports = router;

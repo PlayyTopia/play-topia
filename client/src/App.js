@@ -130,7 +130,7 @@ const App = () => {
             <Route path="EditAboutContact" element={<EditAboutContact />} />
             <Route path="Chat" element={<Chat />} />
             {/* <Route path="UserProfile" element={<UserProfile />} /> */}
-            <Route path="ListRestaurant" element={<ApproveTable />} />
+            <Route path="Comment" element={<ApproveTable />} />
             {/* <Route path="ListAdmin" element={<AdminInfo />} /> */}
             <Route path="AcceptTables" element={<PendingPosts/>} />
             {/* <Route path="PaymentsInfo" element={<PaymentsInfo />} /> */}
