@@ -57,10 +57,10 @@ const BlogDetails = () => {
           <a className="max-w-3xl mx-auto text-xl text-white sm:text-4xl font-semibold hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
             {onePostData.title}
           </a>
-          <a>
+          <a className="h-1/2">
             <img
               className="w-full my-4"
-              src="https://img.freepik.com/free-vector/mountain-landscape-with-waterfall-night_107791-7316.jpg?w=1380&t=st=1688554450~exp=1688555050~hmac=c366fa9f76c3760daf81ccc65e1cc7c927e72afbba9fd3400fc5d36f6ca78874"
+              src={`http://localhost:5000/${onePostData.image}`}
               alt="Sunset in the mountains"
             />
           </a>
