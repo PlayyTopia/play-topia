@@ -7,7 +7,6 @@ import Swal from "sweetalert2";
 function ReportList({ oneComment, setRefresh, Refresh }) {
   const user_id = useSelector((state) => state.userNew.data[0]?._id);
   const { id } = useParams();
-
   const handleDelete = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -81,11 +80,11 @@ function ReportList({ oneComment, setRefresh, Refresh }) {
           <span className="pr-1 flex-1 text-2xl font-bold">...</span>
         </button>
         <ul className="bg-white border rounded-sm transform scale-0 group-hover:scale-100 absolute transition duration-150 ease-in-out origin-top min-w-32">
-          {oneComment.user_id === user_id && (
+          {oneComment.user_id._id === user_id && (
             <>
-              <li className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer">
+              {/* <li className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer">
                 Edit
-              </li>
+              </li> */}
               <li
                 className="rounded-sm px-3 py-1 hover:bg-gray-100 cursor-pointer"
                 onClick={() => handleDelete()}
