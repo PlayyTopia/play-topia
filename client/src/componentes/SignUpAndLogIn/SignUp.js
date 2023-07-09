@@ -8,13 +8,13 @@ import { fetchUser, addUser } from '../../actions/AllUsersActions';
 
 export default function SignUp() {
   const dispatch = useDispatch();
-  // const { loading, data, error } = useSelector((state) => state.user);
+  const { loading, data, error } = useSelector((state) => state.user);
   
-// console.log(data?.data)
+console.log(data)
   
-// useEffect(() => {
-//     dispatch(fetchUser());
-//   }, [dispatch]);
+useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
   const [userData, setUserData] = useState({ name: '', email: '', phone:"" ,password:"" ,role:0});
 
 

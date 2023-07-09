@@ -12,7 +12,7 @@ export const fetchUser = createAsyncThunk(
       },
     }
       );
-  
+      
       return response.data;
     }
   );
@@ -41,7 +41,6 @@ export const fetchUser = createAsyncThunk(
     }
   );
 
-
 const userSlice = createSlice({
   name: "user",
   initialState: {
@@ -65,8 +64,6 @@ const userSlice = createSlice({
         state.data = null;
         state.error = action.error.message;
       })
-
-      
       .addCase(addUser.pending, (state) => {
         state.loading = true;
         state.error = null;
