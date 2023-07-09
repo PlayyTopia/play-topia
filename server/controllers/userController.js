@@ -48,9 +48,6 @@ const oneUser =  async (req, res) => {
 };
 const oneUserNew =  async (req, res) => {
   const id = req.user.id;
-  console.log("id")
-  console.log(id)
-  console.log("id")
   const user = await User.find({ _id: id });
   console.log(user)
   res.json(user);

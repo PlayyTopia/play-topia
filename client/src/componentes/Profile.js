@@ -12,22 +12,34 @@ import { Button } from "@material-tailwind/react";
 import { fetchgamesS } from "../actions/ApiActions";
 import axios from "axios";
 
+import Popup from "./Popup";
+
 const Profile = () => {
+  //----------------------------------------
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupText, setPopupText] = useState("");
+
+  const togglePopup = () => {
+    setShowPopup(!showPopup);
+  };
+
+  //---------------------------------------
   const { loading, data, error } = useSelector((state) => state.userNew);
   const [favGames, setFavGames] = useState(null);
   const [userId, setUserId] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [userDataNewPortal, setUserDataNewPortal] = useState(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     const token = localStorage.getItem("auth");
-    dispatch(fetchUserNew(token));
+    // dispatch(fetchUserNew(token));
     fetchDataFav(data[0]?._id);
     setUserId(data[0]?._id);
     setUserData(data[0]);
     console.log(data[0]?._id);
-  }, [dispatch]);
+  }, [dispatch, data]);
 
   console.log(userData);
 
@@ -95,15 +107,79 @@ const Profile = () => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setEditMode(false);
-    console.log(userData?.name);
-    console.log(userData?.image);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setEditMode(false);
+  //   console.log(userData?.name);
+  //   console.log(userData?.image);
+  //   try {
+  //     const formData = new FormData();
+  //     formData.append("name", userData.name);
+  //     formData.append("image", userData.image);
+
+  //     const response = await axios.put(
+  //       `http://localhost:5000/api/users/${userId}`,
+  //       formData,
+  //       {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       }
+  //     );
+
+  //     if (response.status === 200) {
+  //       Swal.fire({
+  //         title: "Changes saved successfully",
+  //         icon: "success",
+  //         confirmButtonText: "OK",
+  //         customClass: {
+  //           confirmButton: "my-swal-button",
+  //         },
+  //       }).then(() => {
+  //         dispatch(fetchUserNew(localStorage.getItem("auth")));
+  //       });
+  //     } else {
+  //       Swal.fire({
+  //         title: "Error",
+  //         text: "Failed to save changes",
+  //         icon: "error",
+  //         confirmButtonText: "OK",
+  //         customClass: {
+  //           confirmButton: "my-swal-button",
+  //         },
+  //       });
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     Swal.fire({
+  //       title: "Error",
+  //       text: "An error occurred. Please try again.",
+  //       icon: "error",
+  //       confirmButtonText: "OK",
+  //       customClass: {
+  //         confirmButton: "my-swal-button",
+  //       },
+  //     });
+  //   }
+  // };
+
+  const handleEdit = async (inputValue, inputValue2) => {
+    console.log(inputValue, inputValue2);
+
+    const file = inputValue2.target.files[0];
+    const newUserData = {
+      name: inputValue,
+      image: file,
+      imagePreview: URL.createObjectURL(file),
+    };
+    setUserDataNewPortal({
+      name: inputValue,
+      image: file,
+      imagePreview: URL.createObjectURL(file),
+    });
+
     try {
       const formData = new FormData();
-      formData.append("name", userData.name);
-      formData.append("image", userData.image);
+      formData.append("name", newUserData.name);
+      formData.append("image", newUserData.image);
 
       const response = await axios.put(
         `http://localhost:5000/api/users/${userId}`,
@@ -112,7 +188,8 @@ const Profile = () => {
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-
+      const token = localStorage.getItem("auth");
+      dispatch(fetchUserNew(token));
       if (response.status === 200) {
         Swal.fire({
           title: "Changes saved successfully",
@@ -122,7 +199,9 @@ const Profile = () => {
             confirmButton: "my-swal-button",
           },
         }).then(() => {
-          dispatch(fetchUserNew(localStorage.getItem("auth")));
+          const token = localStorage.getItem("auth");
+          dispatch(fetchUserNew(token));
+          togglePopup();
         });
       } else {
         Swal.fire({
@@ -214,12 +293,33 @@ const Profile = () => {
                 </Button>
               </>
             ) : (
-              <Button
-                className="p-1 h-10 border-solid border-[#E8AA42] border-2 text-[#E8AA42] hover:bg-[#E8AA42] hover:text-[#ffffff]"
-                onClick={toggleEditMode}
-              >
-                Edit
-              </Button>
+              // <Button
+              //   className="p-1 h-10 border-solid border-[#E8AA42] border-2 text-[#E8AA42] hover:bg-[#E8AA42] hover:text-[#ffffff]"
+              //   onClick={toggleEditMode}
+              // >
+              //   Edit
+              // </Button>
+
+              <div className="app">
+                <div className="input-container">
+                  <Button
+                    className="p-1 h-10 border-solid border-[#E8AA42] border-2 text-[#E8AA42] hover:bg-[#E8AA42] hover:text-[#ffffff]"
+                    onClick={() => {
+                      togglePopup;
+                      setShowPopup(true);
+                    }}
+                  >
+                    EDIT
+                  </Button>
+                </div>
+                {showPopup && (
+                  <Popup
+                    onClose={togglePopup}
+                    onEdit={handleEdit}
+                    text={popupText}
+                  />
+                )}
+              </div>
             )}
           </div>
         </div>

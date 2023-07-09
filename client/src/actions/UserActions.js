@@ -12,6 +12,7 @@ export const fetchUserNew = createAsyncThunk(
       },
     }
     );
+
     return response.data;
   }
 );
