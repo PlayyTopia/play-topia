@@ -50,7 +50,7 @@ function PostForm() {
       />
       <div className="editor mx-auto w-10/12 flex flex-col text-gray-800  p-4  max-w-2xl shadow-2xl">
         <input
-          className="shadow mb-4 appearance-none border rounded w-full py-2 px-3 bg-gray-100 text-black leading-tight focus:outline-none focus:shadow-outline"
+          className="shadow mb-4 appearance-none border rounded-lg  w-full py-2 px-3 bg-gray-100 text-black leading-tight focus:outline-none focus:shadow-outline"
           type="file"
           placeholder="Table Image"
           name="guest_num"
@@ -60,7 +60,7 @@ function PostForm() {
           accept="image/*"
         />
         <input
-          className="title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
+          className="title rounded-lg  bg-gray-100 border border-gray-300 p-2 mb-4 outline-none"
           spellCheck="false"
           placeholder="Title"
           type="text"
@@ -68,7 +68,7 @@ function PostForm() {
           onChange={onTitleChanged}
         />
         <textarea
-          className="description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none"
+          className="description rounded-lg  bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none"
           spellCheck="false"
           placeholder="Describe everything about this post here"
           defaultValue={""}
@@ -82,7 +82,7 @@ function PostForm() {
         <div className="buttons flex">
           <button
             type="submit"
-            className="btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
+            className="btn border rounded-lg  border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500"
           >
             Post
           </button>

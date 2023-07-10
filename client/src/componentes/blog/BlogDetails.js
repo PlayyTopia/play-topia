@@ -59,7 +59,7 @@ const BlogDetails = () => {
           </a>
           <a className="h-1/2">
             <img
-              className="w-full my-4"
+              className="w-full h-[500px] my-4"
               src={`http://localhost:5000/${onePostData.image}`}
               alt="Sunset in the mountains"
             />

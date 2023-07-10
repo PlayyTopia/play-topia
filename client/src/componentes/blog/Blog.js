@@ -66,7 +66,7 @@ const Blog = () => {
       </section>
       <>
         {/* add post  form */}
-        <PostForm />
+      
       </>
 
       {/* //////////////////////////////// */}
@@ -78,7 +78,7 @@ const Blog = () => {
               alt="dining"
               className="w-full h-full absolute z-1   xl:block rounded-3xl"
             />
-            <div className="bg-white bg-opacity-30 rounded-3xl lg:py-36 py-60 md:px-20  px-10 sm:px-4 flex flex-col items-center justify-center relative z-1">
+            <div className="bg-fuchsia-300 bg-opacity-30 rounded-3xl lg:py-36 py-60 md:px-20  px-10 sm:px-4 flex flex-col items-center justify-center relative z-1">
               <h1 className="text-4xl font-semibold leading-9 text-white text-center">
                 CONNECT WITH US FOR GAMING UPDATE.{" "}
               </h1>
@@ -103,6 +103,7 @@ const Blog = () => {
           </div>
         </div>
       </div>
+      <PostForm />
     </>
   );
 };
