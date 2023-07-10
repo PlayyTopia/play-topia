@@ -5,21 +5,20 @@ const Post = require("../../models/blog");
 const upload = require("../../middleware/handleImage");
 
 const addPost = async (req, res) => {
-    const { user_id, user_name, title, desc } = req.body;
+  const { user_id, user_name, title, desc } = req.body;
+  try {
+    const savedPost = await Post.create({
+      user_id,
+      user_name,
+      title,
+      description: desc,
+      image: req.file.path, // Store the filename in the image field
+    });
 
-    try {
-        const savedPost = await Post.create({
-            user_id,
-            user_name,
-            title,
-            description: desc,
-            // image: req.file, // Store the filename in the image field
-        });
-
-        res.status(201).json(savedPost);
-    } catch (error) {
-        res.status(500).json(error.message);
-    }
+    res.status(201).json(savedPost);
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
 };
 
 
@@ -75,23 +74,23 @@ const approvePost= async (req, res) => {
     errorHandler(error, req, res);
   }
 };
-//////////////get all comment
+//get reported comment
 const getAllComments = async (req, res) => {
   try {
-    const posts = await Post.find({ "comments.delete": false }, "comments"); // Find all posts and include only the comments field
 
-    let allComments = [];
-
-    posts.forEach((post) => {
-      allComments = allComments.concat(post.comments);
+    const posts = await Post.find().populate('comments.user_id').populate("comments.reports.user_id");
+  const comments =  posts.map((post) => {
+      return post.comments.filter(
+        (comment) => comment.reports.length !== 0
+      );
     });
 
-    res.json(posts);
+    res.status(200).json(comments);
   } catch (error) {
-    errorHandler(error, req, res);
+    res.status(500, error.message);
+    console.log(error.message);
   }
 };
-
 const deleteComment = async (req, res) => {
   const commentId = req.params.id;
   const postId = req.params.postId; 
@@ -115,7 +114,6 @@ console.log(commentId,postId)
 };
 
 
-
 module.exports = {
   addPost,
   getPost,
@@ -124,3 +122,4 @@ module.exports = {
   getAllComments,
   deleteComment
 };
+

@@ -16,8 +16,8 @@ import Footer from './componentes/footer';
 import Blog from './componentes/blog/Blog';
 import BlogDetails from './componentes/blog/BlogDetails';
 import Contact from './componentes/Contact';
-import Games from './pages/dashboard/Games';
-import  About from './componentes/About'
+import Games from './pages/Games';
+import About from './componentes/About'
 
 // ------------------dashboard -------------------------- //
 // import ApproveTable from './componentes/dashboard/ApproveTable'
@@ -43,42 +43,42 @@ const App = () => {
   const [hideRouter2, setHideRouterAdmin] = useState(true);
 
 
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+
+
+  // useEffect(() => {
+  //   if (localStorage.auth != null) {
+  //     dispatch(fetchUserNew());
+  //   }
+  // }, [dispatch]);
 
 
   useEffect(() => {
     if (localStorage.auth != null) {
-      dispatch(fetchUserNew());
+      getUserInfo()
     }
   }, [dispatch]);
 
-
-     useEffect(() => {
-      if(localStorage.auth != null){ 
-      getUserInfo()
-    }
-    }, []);
-      
-    const [userData ,setUserData]= useState(null)
-   const getUserInfo = async ()=>{
+  const [userData, setUserData] = useState(null)
+  const getUserInfo = async () => {
     try {
-        const token = localStorage.getItem("auth");
-        const response = await dispatch(fetchUserNew(token)); 
-        setUserData(response.payload[0]) 
-        let ManegeRouters =[];
+      const token = localStorage.getItem("auth");
+      const response = await dispatch(fetchUserNew(token));
+      setUserData(response.payload[0])
+      let ManegeRouters = [];
 
-        let role=response.payload[0].role
-        if(role ==1){
-          ManegeRouters= [true ,false,true ]
-        }else{
-          ManegeRouters= [false ,true,true ]
-        }
-        setHideRouterUser(ManegeRouters[0]);
-        setHideRouterAdmin(ManegeRouters[1]);      
-      } catch (error) {
-        console.error('Failed to add Pokemon:', error);
+      let role = response.payload[0].role
+      if (role == 1) {
+        ManegeRouters = [true, false, true]
+      } else {
+        ManegeRouters = [false, true, true]
       }
-}
+      setHideRouterUser(ManegeRouters[0]);
+      setHideRouterAdmin(ManegeRouters[1]);
+    } catch (error) {
+      console.error('Failed to add Pokemon:', error);
+    }
+  }
 
 
 
@@ -97,6 +97,7 @@ const App = () => {
           <Route path="Blog" element={<Blog />} />
           <Route path="Contact" element={<Contact />} />
           <Route path="Games" element={<Games />} />
+          <Route path="About" element={<About />} />
         </Routes>
         <Footer />
       </Router>
@@ -127,7 +128,7 @@ const App = () => {
           <Routes>
             <Route index element={<MainDashboard />} />
             <Route path="ListUser" element={<UserInfo />} />
-            <Route path="EditAboutContact" element={<EditAboutContact />} />
+            <Route path=" " element={<EditAboutContact />} />
             <Route path="Chat" element={<Chat />} />
             {/* <Route path="UserProfile" element={<UserProfile />} /> */}
             <Route path="Comment" element={<ApproveTable />} />

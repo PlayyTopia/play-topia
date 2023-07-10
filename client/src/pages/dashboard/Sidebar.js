@@ -70,8 +70,7 @@ function handleLogOut(){
         <div className="mb-2 p-4">
         <Typography className="text-[#E8AA42]" variant="h5" color="blue-gray">
         <Link to="/">
-            {/* <img className="animate-pulse" src={logo} alt="logo" width={150} height={50} /> */}
-            {/* <p className="text-black">Give Life</p> */}
+        
           </Link>
           </Typography>
         </div>
@@ -86,14 +85,7 @@ function handleLogOut(){
           </Link>
 
 
-          {/* <Link to='/ListAdmin'>
-           <ListItem className="hover:bg-[#E8AA42]">
-            <ListItemPrefix>
-            <Icon path={mdiShieldCrownOutline } size={1} />
-            </ListItemPrefix>
-            <a style={{color:'black'}}> Admins list </a>
-          </ListItem>
-          </Link> */}
+        
 
            <Link to='/ListUser'>
            <ListItem className="hover:bg-[#babccf] hover:text-white">
@@ -109,18 +101,11 @@ function handleLogOut(){
             <ListItemPrefix>
             <Icon path={mdiHandshakeOutline } size={1} />
             </ListItemPrefix>
-            <a style={{color:'black'}}> User's Post </a>
+            <a style={{color:'black'}}>Comment's Report </a>
           </ListItem>
           </Link>
 
-          {/* <Link to='/EditAboutContact'>
-          <ListItem className="hover:bg-[#E8AA42]">
-            <ListItemPrefix>
-            <Icon path={mdiInformationOutline} size={1} />
-            </ListItemPrefix>
-            <a style={{color:'black'}}> Edit About </a>
-          </ListItem>
-          </Link> */}
+        
 
           <Link to='/AcceptTables'>
           <ListItem className="hover:bg-[#babccf] hover:text-white">
@@ -131,45 +116,6 @@ function handleLogOut(){
           </ListItem>
           </Link>
 
-          {/* <Link to='/PaymentsInfo'>
-          <ListItem className="hover:bg-[#E8AA42]">
-            <ListItemPrefix>
-            <Icon path={mdiCashClock} size={1} />
-            </ListItemPrefix>
-            <a style={{color:'black'}}> payments </a>
-          </ListItem>
-          </Link> */}
-
-         {/* <Link to='/Chat'>
-         <ListItem className="hover:bg-[#E8AA42]">
-            <ListItemPrefix>
-              <InboxIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            <a style={{color:'black'}}> Inbox </a>
-            {/* <ListItemSuffix>
-              <Chip value="14" size="sm" variant="white" color="blue-gray" className="rounded-full" />
-            </ListItemSuffix> */}
-          {/* </ListItem>
-          </Link>  */}
-
-{/* 
-         <Link to="UserProfile">
-          <ListItem>
-            <ListItemPrefix>
-              <UserCircleIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            <a style={{color:'white'}}> Profile </a>
-          </ListItem>
-          </Link> */}
-
-          {/* <Link to="/">
-          <ListItem>
-            <ListItemPrefix>
-              <Cog6ToothIcon className="h-5 w-5" />
-            </ListItemPrefix>
-            Settings
-          </ListItem>
-            </Link> */}
            <button onClick={handleLogOut}>
            <ListItem className="hover:bg-[#babccf] hover:text-white">
             <ListItemPrefix>

@@ -111,7 +111,7 @@ export default function SignUp() {
     <div className="max-w-screen-xl m-0 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
         <div className="lg:w-1/2 xl:w-6/12 p-6 sm:p-12">
         <div>
-                <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"
+                <img src="https://pisces.bbystatic.com/image2/BestBuy_US/images/products/6430/6430660_sd.jpg;maxHeight=640;maxWidth=550"
                     className="w-32 mx-auto" />
             </div>
             <div className="mt-12 flex flex-col items-center">
@@ -165,7 +165,7 @@ export default function SignUp() {
                             <p className="text-red-500">{passwordp}</p>
                       
                         <button type='submit' 
-                            className="mt-5 bg-[#F7E1AE] tracking-wide font-semibold  text-gray-800 w-full py-4 rounded-lg hover:bg-[#A4D0A4] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                            className="mt-5 bg-[#a249c9] tracking-wide font-semibold text-gray-800 w-full py-4 rounded-lg hover:bg-[#4d64d8] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                             <svg className="w-6 h-6 -ml-2" fill="none" stroke="currentColor" strokeWidth="2"
                                 strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
@@ -189,7 +189,7 @@ export default function SignUp() {
             </div>
         </div>
         <div className="flex-1 bg-indigo-100 text-center hidden lg:flex login_img bg-cover bg-center bg-no-repeat ">
-        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_1280.jpg"/>
+        <img src="https://img.freepik.com/free-vector/joystick-game-sport-technology_138676-2045.jpg?t=st=1688520580~exp=1688521180~hmac=65055d52cf3240cb9e8b011607bd3c85021f807bc831861c3db1ec06686d95b8"/>
 
         </div>
     </div>

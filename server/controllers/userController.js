@@ -116,9 +116,9 @@ const protected = async  (req, res) => {
 
 const updateUser = async (req, res) => {
   const image = req.file.path
-  const { firstName } = req.body;
+  const { name } = req.body;
   const userId  = req.params.id;
-    const user = await User.findByIdAndUpdate(userId, {firstName:firstName,img:image}, { new: true });
+    const user = await User.findByIdAndUpdate(userId, {name:name,img:image}, { new: true });
     const updatedUser = await user.save();
     res.json(updatedUser);
 };

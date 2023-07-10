@@ -33,12 +33,6 @@ const PendingPosts = () => {
     } catch (error) {
       console.error("Error inserting data:", error);
     }
-
-
-  
-
-
-
   };
 
 

@@ -5,6 +5,8 @@ import { fetchUserNew } from '../actions/UserActions';
 
 const Contact = () => {
     const dispatch = useDispatch();
+    const user_id = useSelector((state) => state.userNew.data[0]?._id);
+    console.log(user_id)
     const [userData, setUserData] = useState(null)
     const getUserInfo = async () => {
         try {

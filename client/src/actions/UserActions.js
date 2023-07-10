@@ -12,7 +12,6 @@ export const fetchUserNew = createAsyncThunk(
       },
     }
     );
-    console.log(response.data);
     return response.data;
   }
 );

@@ -63,8 +63,6 @@ const ApproveTable = () => {
       const response = await axios.get("http://localhost:5000/allComments");
       setPostComment(response.data);
       console.log(response.data)
-    
-    
       setFilterDataRestaurants(response.data)
     } catch (error) {
       console.error("Error inserting data:", error);
@@ -75,7 +73,6 @@ const ApproveTable = () => {
     // allAdmins()
   }, []);
   const handleDelete = ( name, commentId,postId) => {
-    console.log(commentId)
     
     Swal.fire({
       title: ` Do you want to remove ${name} Comment?  `,
@@ -114,12 +111,12 @@ const ApproveTable = () => {
       <div className='bg-[#ffffff] mr-5 ml-5 p-10 rounded-2xl min-h-[calc(100vh)] '>
         <div className="relative flex items-center justify-between pt-4">
           <div className="text-xl font-bold text-navy-700 dark:text-white">
-            All Comment
+            Reported Comment
           </div>
 
         </div>
 
-        <form>
+        {/* <form>
 
           <div className="relative">
 
@@ -137,11 +134,11 @@ const ApproveTable = () => {
             />
 
           </div>
-        </form>
+        </form> */}
 
         <div className="mt-8 overflow-x-scroll xl:overflow-hidden">
           <table role="table" className="w-full">
-            <thead>
+            {/* <thead>
               <tr role="row">
                 <th
                   colSpan={1}
@@ -155,27 +152,23 @@ const ApproveTable = () => {
               
 
               </tr>
-            </thead>
-
+            </thead> */}
+            
 
             {
           
           postComment.map((ele) => {
             return(
-            ele.comments.map((e)=>{
-
-
-
+            ele.map((e)=>{
 
                 return (
 
                   <tbody role="rowgroup">
 
 <div className="flex flex-col ">
-          
-            
-            
-              <div className="border rounded-md bg-white p-3 ml-3 my-3">
+              <div className="border border-gray-300 rounded-md bg-white p-3 ml-3 my-3">
+                {/* <h2 className='pb-5'><span className='text-lg font-bold'>{e.user_name}</span> report on this comment :</h2> */}
+                <div className='border-2 p-5 rounded-md border-red-500'>
                 <div className="flex gap-3 items-center">
                   <img
                     src="https://avatars.githubusercontent.com/u/22263436?v=4"
@@ -186,7 +179,14 @@ const ApproveTable = () => {
                   <h3 className="font-bold">{e.user_name}</h3>
                 </div>
                 <p className="text-gray-600 mt-2">{e.comment_details}</p>
-                <div className="pt-[14px] pb-[18px] sm:text-[14px] flex justify-end">  
+                </div>
+                <div className='p-5 text-red-600'>
+                  Report Details : 
+            {e.reports.map((report) => (
+              <h3 className='text-black ml-5 pt-5' key={report._id}>{report.reportDetails}</h3>
+            ))}
+          </div>
+                <div className="  sm:text-[14px] flex justify-end">  
                       <button
                         onClick={() => handleDelete(e.user_name,e._id,ele._id)}
                       >
