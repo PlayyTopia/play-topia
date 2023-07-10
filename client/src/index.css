@@ -25,7 +25,6 @@ body {
     background-color: #E8AA42;
     color: #ffffff;
   }
-/* //////////////////// */
   .popup-overlay {
     position: fixed;
     top: 0;
@@ -52,14 +51,14 @@ body {
   
 
   
-  input[type='text'] {
+  input.popInput[type='text'] {
     padding: 10px;
     border-radius: 5px;
     border: 1px solid #ccc;
     margin: 1rem 0;
   }
   
-  button {
+  button.popButton {
     padding: 10px 20px;
     background-color: #61dafb;
     border: none;
