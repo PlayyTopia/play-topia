@@ -19,7 +19,7 @@ const Popup = ({ onClose, text,onEdit }) => {
        
        <div>
         <input
-        className='pl-5 ml-5'
+        className='pl-5 ml-5 popInput'
                 type="file"
                 name="image"
                 required
@@ -27,8 +27,8 @@ const Popup = ({ onClose, text,onEdit }) => {
               />
           </div>
         <div>
-        <button onClick={onClose}>Close</button>
-        <button onClick={() => onEdit(inputValue,inputValue2)}>edit</button>
+        <button className='popButton' onClick={onClose}>Close</button>
+        <button className='popButton' onClick={() => onEdit(inputValue,inputValue2)}>edit</button>
         </div>
 
       </div>

@@ -12,13 +12,20 @@ export const fetchFavGames = createAsyncThunk("favGames/fetchFavGames", async (i
     }
   });
   
-  const favGamesSlice = createSlice({
+  const favGamesSlice = createSlice(
+  
+    {
     name: "favGames",
+
+
+
     initialState: {
       loading: false,
       data: null,
       error: "",
     },
+
+
     reducers: {},
     extraReducers: (builder) => {
       builder
