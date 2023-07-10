@@ -14,7 +14,6 @@ const allGames = (req, res) => {
 
   const favoriteGames = (req, res) => {
     const userId = req.params.id;
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
     Game.find({ UsersIdFavorite: { $in: [userId] } })
       .then((data) => {
         res.json(data);
