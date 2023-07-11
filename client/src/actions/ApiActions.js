@@ -25,6 +25,8 @@ export const fetchGames = createAsyncThunk("gamesP/fetchGames", async () => {
   }
 });
 
+
+
 export const fetchgamesS = createAsyncThunk("gamesS/fetchgamesS", async () => { 
   try {
     const response = await axios.get("http://localhost:5000/api/games");

@@ -9,6 +9,8 @@ import userNewReducer from './actions/UserActions'
 const store = configureStore({
   reducer: {
     user: userReducer,
+
+    
     games: gamesReducer,
 
 
